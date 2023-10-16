@@ -1,7 +1,7 @@
 # .gitignore
 
-# Ignore R history files
-.R
+# Ignore les fichiers R 
+*.R
 
-# Ignore Jupyter Notebook files
+# Ignore les Jupyter Notebook 
 *.ipynb

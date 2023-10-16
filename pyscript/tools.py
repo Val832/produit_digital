@@ -20,7 +20,7 @@ class crawler :
             return {"error": str(e)}
             
     @staticmethod
-    def find_element(html_content, tag, class_name=None, element_id=None):
+    def find_elements(html_content, tag, class_name=None, element_id=None):
         """
         Recherche tous les éléments HTML dans le contenu HTML fourni en utilisant le tag et le nom de la classe ou l'ID.
 
@@ -178,6 +178,23 @@ class crawler :
         return df
 
 class clean_df : 
+
+    @staticmethod
+    def convert_str_na_to_nan(df, na_values):
+        """
+        Convertit les chaînes de caractères représentant des NA en NaN.
+
+        Paramètres:
+        - df (pd.DataFrame): Le DataFrame en entrée.
+        - na_values (list of str): Liste des chaînes de caractères représentant des NA.
+
+        Retourne:
+        pd.DataFrame: DataFrame avec les chaînes représentant des NA converties en NaN.
+
+        Exemple d'utilisation:
+        convert_str_na_to_nan(df, na_values=["NA", "N/A", "null"])
+        """
+        return df.replace(na_values, pd.NA)
 
     @staticmethod
     def drop_na(df, col=None, cols=None):
