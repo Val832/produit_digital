@@ -2,54 +2,121 @@ from bs4 import BeautifulSoup
 import requests  
 import pandas as pd 
 
-class crawler :
+class Crawler :
 
-    # à commenter et à documenter + mauvaises gestion des erreurs
+    """ [Class Docstring]
+    Crawler: Classe d'extraction et d'analyse de contenu HTML.
+
+    Cette classe est conçue pour extraire le contenu HTML d'une URL spécifiée et fournir 
+    des méthodes pour explorer et extraire des informations spécifiques du contenu.
+
+    Attributs:
+    ----------
+    Aucun
+
+    Méthodes:
+    ---------
+    - extract_html(url: str) -> Union[BeautifulSoup, Dict[str, str]]:
+        Effectue une requête HTTP GET à l'URL spécifiée et renvoie le contenu HTML ou un 
+        message d'erreur.
+    
+    - find_elements(html_content: BeautifulSoup, tag: str, class_name: Optional[str], 
+                    element_id: Optional[str]) -> Tuple[str, Union[List[BeautifulSoup], None]]:
+        Recherche tous les éléments HTML correspondants dans le contenu fourni en fonction 
+        du tag, du nom de classe ou de l'ID et renvoie un tuple contenant un message et la 
+        liste des éléments correspondants.
+
+    - find_element(html_content: BeautifulSoup, tag: str, class_name: Optional[str], 
+                   element_id: Optional[str]) -> Union[BeautifulSoup, Dict[str, str]]:
+        Recherche le premier élément HTML correspondant dans le contenu fourni et renvoie 
+        l'élément ou un message d'erreur.
+
+    - extract_table(html_content: BeautifulSoup, class_name: Optional[str], table_id: Optional[str]) -> pd.DataFrame:
+        Extrait une table du contenu HTML fourni, la convertit en un DataFrame pandas et 
+        renvoie le DataFrame.
+
+    Exemple d'utilisation:
+    ----------------------
+    crawler = Crawler()
+    html_content = crawler.extract_html("https://www.example.com")
+    message, elements = crawler.find_elements(html_content, 'table', class_name='myTable')
+    """
+
     @staticmethod
-    def extract_html(url):
-        try:
-            req = requests.get(url)
-            status = req.status_code
+    def extract_html(url: str):
 
-            if status == 200:
-                html_content = BeautifulSoup(req.text, 'html.parser')
-                return html_content
-            else:
-                return {"error": f"error in get method: {status}"}
+        """ [Function Docstring]
+        Extrait le contenu HTML d'une URL donnée.
+
+        Paramètres:
+        -----------
+        url : str
+            L'URL à partir de laquelle extraire le contenu HTML.
+
+        Retourne:
+        --------
+        BeautifulSoup
+            Une instance de BeautifulSoup contenant le contenu HTML si la requête est réussie.
+        Dict[str, str]
+            Un dictionnaire avec un message d'erreur si la requête échoue ou si un autre problème survient.
+
+        Exemples:
+        --------
+        >>> extract_html("https://www.example.com")
+        <html>...</html>
+
+        >>> extract_html("https://www.invalid-url.com")
+        {'error': 'An error occurred: ...'}
+        """
+
+        try:
+            response = requests.get(url)
+
+            # Si la requête est réussie (code 200), on renvoie le contenu HTML
+            if response.status_code == 200:
+                return BeautifulSoup(response.text, 'html.parser')
+
+            # Sinon, on renvoie un dictionnaire d'erreur
+            return print({"error": f"error in get method: {response.status_code}"})
+        
+        # Gestion des exceptions liées aux requêtes
         except requests.RequestException as e:
-            return {"error": str(e)}
+            return {"error": f"An error occurred: {str(e)}"}
             
     @staticmethod
     def find_elements(html_content, tag, class_name=None, element_id=None):
-        """
+
+        """ [Function Docstring]
         Recherche tous les éléments HTML dans le contenu HTML fourni en utilisant le tag et le nom de la classe ou l'ID.
 
-        :param html_content: Objet BeautifulSoup contenant le contenu HTML à analyser.
-        :type html_content: BeautifulSoup
+        Paramètres:
+        -----------
+        html_content : BeautifulSoup
+            Objet BeautifulSoup contenant le contenu HTML à analyser.
+        tag : str
+            Tag HTML de l'élément à rechercher (par exemple, 'table', 'div', 'a', etc.).
+        class_name : str, optional
+            Nom de la classe CSS de l'élément à rechercher. Utilisé pour la sélection d'élément basée sur la classe.
+        element_id : str, optional
+            ID de l'élément à rechercher. Utilisé pour la sélection d'élément basée sur l'ID.
 
-        :param tag: Tag HTML de l'élément à rechercher (par exemple, 'table', 'div', 'a', etc.).
-        :type tag: str
+        Retourne:
+        --------
+        tuple (str, list of BeautifulSoup objects or None)
+            Renvoie une paire (message, liste des éléments trouvés). Le message fournit le nombre de correspondances trouvées. Si aucun élément n'est trouvé, le message indique une absence de correspondance.
 
-        :param class_name: Nom de la classe CSS de l'élément à rechercher. Utilisé pour la sélection d'élément basée sur la classe.
-        :type class_name: str, optional
+        Exemples:
+        --------
+        >>> from bs4 import BeautifulSoup
+        >>> html = "<html><body><table class='myTable'><tr><td>Content</td></tr></table></body></html>"
+        >>> soup = BeautifulSoup(html, 'html.parser')
+        >>> message, elements = find_elements(soup, 'table', class_name='myTable')
+        >>> print(message)
+        1 correspondance(s) trouvée(s) avec le tag table et myTable
 
-        :param element_id: ID de l'élément à rechercher. Utilisé pour la sélection d'élément basée sur l'ID.
-        :type element_id: str, optional
-
-        :return: Renvoie une paire (message, liste des éléments trouvés). Le message fournit le nombre de correspondances trouvées. Si aucun élément n'est trouvé, le message indique une absence de correspondance.
-        :rtype: tuple (str, list of BeautifulSoup objects or None)
-
-        :raises ValueError: Si l'objet html_content fourni n'est pas une instance de BeautifulSoup, ou si ni class_name ni element_id ne sont fournis.
-
-        Exemple d'utilisation:
-        ---------------------
-
-        from bs4 import BeautifulSoup
-
-        html = "<html><body><table class='myTable'><tr><td>Content</td></tr></table></body></html>"
-        soup = BeautifulSoup(html, 'html.parser')
-
-        message, elements = find_element(soup, 'table', class_name='myTable')
+        Exceptions:
+        ----------
+        ValueError: Si l'objet html_content fourni n'est pas une instance de BeautifulSoup, ou si ni class_name ni element_id ne sont fournis.
         """
 
         # Vérification du type de l'objet html_content
@@ -65,45 +132,46 @@ class crawler :
             raise ValueError("L'un des deux paramètres class_name ou element_id doit être fourni.")
         
         # Vérification du nombre d'éléments trouvés
-        count = len(res)
-        if count == 0:
+        if res is None:
             return f"aucune correspondance avec le tag {tag} et {class_name or element_id}", None
         else:
-            return f"{count} correspondance(s) trouvée(s) avec le tag {tag} et {class_name or element_id}", res
+            return f"{(len(res))} correspondance(s) trouvée(s) avec le tag {tag} et {class_name or element_id}", res
 
         
     @staticmethod
-    def find_element(html_content, tag, class_name=None, element_id=None):
-        """
-        Méthode pour trouver un élément HTML spécifique dans le contenu HTML fourni en utilisant le tag ou le nom de classe
-        ou l'ID de l'élément.
-        
-        :param html_content: Objet BeautifulSoup contenant le contenu HTML à analyser.
-        :type html_content: BeautifulSoup
-        
-        :param tag: Tag HTML de l'élément à rechercher (par exemple, 'table', 'div', 'a', etc.).
-        :type tag: str
-        
-        :param class_name: Nom de la classe CSS de l'élément à rechercher. Utilisé pour la sélection d'élément basée sur la classe.
-        :type class_name: str, optional
-        
-        :param element_id: ID de l'élément à rechercher. Utilisé pour la sélection d'élément basée sur l'ID.
-        :type element_id: str, optional
-        
-        :return: Renvoie l'élément trouvé sous forme d'objet BeautifulSoup si l'élément est trouvé, sinon renvoie un message d'erreur.
-        :rtype: BeautifulSoup object or dict
-        
-        :raises ValueError: Si l'objet html_content fourni n'est pas une instance de BeautifulSoup, ou si ni class_name ni element_id ne sont fournis.
-        
-        Exemple d'utilisation:
-        ---------------------
-        
-        from bs4 import BeautifulSoup
-        
-        html = "<html><body><table class='myTable'><tr><td>Content</td></tr></table></body></html>"
-        soup = BeautifulSoup(html, 'html.parser')
-        
-        table_element = MyClass.find_element(soup, 'table', class_name='myTable')
+    def find_element(html_content, tag, class_name=None, element_id=None): 
+
+        """ [Function Docstring]
+        Recherche le premier élément HTML correspondant dans le contenu HTML fourni en utilisant le tag et le nom de la classe ou l'ID.
+
+        Paramètres:
+        -----------
+        html_content : BeautifulSoup
+            Objet BeautifulSoup contenant le contenu HTML à analyser.
+        tag : str
+            Tag HTML de l'élément à rechercher (par exemple, 'table', 'div', 'a', etc.).
+        class_name : str, optional
+            Nom de la classe CSS de l'élément à rechercher. Utilisé pour la sélection d'élément basée sur la classe.
+        element_id : str, optional
+            ID de l'élément à rechercher. Utilisé pour la sélection d'élément basée sur l'ID.
+
+        Retourne:
+        --------
+        BeautifulSoup object or dict
+            Retourne le premier élément BeautifulSoup trouvé. Si aucun élément n'est trouvé, retourne un dictionnaire avec un message d'erreur.
+
+        Exemples:
+        --------
+        >>> from bs4 import BeautifulSoup
+        >>> html = "<html><body><div class='myDiv'>Content</div></body></html>"
+        >>> soup = BeautifulSoup(html, 'html.parser')
+        >>> element = find_element(soup, 'div', class_name='myDiv')
+        >>> print(element)
+        <div class="myDiv">Content</div>
+
+        Exceptions:
+        ----------
+        ValueError: Si l'objet html_content fourni n'est pas une instance de BeautifulSoup, ou si ni class_name ni element_id ne sont fournis.
         """
         
         # Vérification du type de l'objet html_content
@@ -122,7 +190,7 @@ class crawler :
             raise ValueError("L'un des deux paramètres class_name ou element_id doit être fourni.")
         
         # Si aucun élément n'est trouvé, retourne un dictionnaire contenant un message d'erreur
-        if len(res) == 0  :
+        if res is None :
             return {f"aucune correspondance avec le tag {tag} et {class_name or element_id}"}  
         # Si un élément est trouvé, imprime un message et retourne l'élément trouvé
         else:
@@ -130,24 +198,37 @@ class crawler :
 
     @staticmethod  
     def extract_table(html_content, class_name=None, table_id=None):
-        """
-        Extrait une table du contenu HTML en utilisant soit class_name soit table_id.
 
-        Paramètres :
-        - html_content (BeautifulSoup) : Objet BeautifulSoup contenant le contenu HTML.
-        - class_name (str, optionnel) : Nom de classe de la table à extraire. Par défaut à None.
-        - table_id (str, optionnel) : ID de la table à extraire. Par défaut à None.
+        """ [Function Docstring]
+        Extrait une table du contenu HTML fourni en utilisant soit le nom de la classe `class_name` soit l'ID `table_id`.
 
-        Renvoie :
-        pd.DataFrame : DataFrame contenant les données de la table extraites.
+        Paramètres:
+        -----------
+        html_content : BeautifulSoup
+            Objet BeautifulSoup contenant le contenu HTML à analyser.
+        class_name : str, optional
+            Nom de la classe CSS de la table à extraire. Utilisé pour la sélection de la table basée sur la classe.
+        table_id : str, optional
+            ID de la table à extraire. Utilisé pour la sélection de la table basée sur l'ID.
 
-        Lève :
-        - ValueError : Si l'entrée n'est pas un objet BeautifulSoup ou si la table n'est pas trouvée.
-
-        Exemple :
+        Retourne:
         --------
-        >>> extract_table(ma_page_html, class_name='ma_classe')
-        ... # Renvoie un DataFrame contenant les données de la table
+        pd.DataFrame
+            DataFrame contenant les données de la table extraites.
+
+        Exceptions:
+        ----------
+        ValueError: Si l'objet `html_content` fourni n'est pas une instance de BeautifulSoup, si la table n'est pas trouvée, ou si ni `class_name` ni `table_id` ne sont fournis.
+
+        Exemples:
+        --------
+        >>> from bs4 import BeautifulSoup
+        >>> html = "<html><body><table class='myTable'><tr><th>Header</th></tr><tr><td>Data</td></tr></table></body></html>"
+        >>> soup = BeautifulSoup(html, 'html.parser')
+        >>> df = extract_table(soup, class_name='myTable')
+        >>> print(df)
+        Header
+        0   Data
         """
 
         if not isinstance(html_content, BeautifulSoup): 
@@ -198,25 +279,6 @@ class clean_df :
 
     @staticmethod
     def drop_na(df, col=None, cols=None):
-        """
-        Supprime les lignes du DataFrame qui contiennent des valeurs NA/NaN.
-
-        Paramètres:
-        - df (pd.DataFrame): Le DataFrame en entrée.
-        - col (str, optionnel): La colonne spécifique dans laquelle vérifier la présence de valeurs NA. 
-                                Si None, toutes les colonnes sont vérifiées.
-        - cols (list of str, optionnel): Une liste de colonnes dans lesquelles vérifier la présence de valeurs NA.
-                                        Si None, toutes les colonnes sont vérifiées. `col` et `cols` ne doivent pas être utilisés ensemble.
-
-        Retourne:
-        pd.DataFrame: DataFrame avec les lignes contenant des valeurs NA supprimées.
-
-        Exemples d'utilisation:
-        - Pour supprimer les lignes avec des NA dans toutes les colonnes : drop_na(df)
-        - Pour supprimer les lignes avec des NA dans une colonne spécifique : drop_na(df, col='nom_colonne')
-        - Pour supprimer les lignes avec des NA dans plusieurs colonnes spécifiques : drop_na(df, cols=['col1', 'col2'])
-
-        """
 
         if not isinstance(df, pd.DataFrame):
             raise ValueError("L'entrée doit être un DataFrame Pandas.")

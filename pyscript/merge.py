@@ -1,40 +1,68 @@
-import re
 import concurrent.futures
-
+from bs4 import BeautifulSoup
 import pandas as pd
+import re
 
 from scrap import URLS, REGEX_PATTERN
-from tools import crawler
+from tools import Crawler
 
 # préciser quelle bdd à enrichir en précisant l'index dans URLS
-index = 2
+index = 1
 url = URLS[index]
 file_name = re.search(REGEX_PATTERN, url).group(1)
 
-def fetch_data(url):
-    res = crawler.extract_html(url)
-    table = crawler.find_element(res, tag='table', element_id='test-suite-results')
+def missing_table (): 
+    res = Crawler.extract_html("https://www.harddrivebenchmark.net/hdd.php?hdd=35TTFP6PCIE-256G&id=27777")
+    table = Crawler.find_element(res, tag='table', element_id='test-suite-results')
+    print(table)
 
-    data = {}
+    missing_table = {}
     for row in table.findAll('tr'):
         header = row.find('th').text
-        value = row.find('td').text
-        data[header] = value
+        missing_table[header] = "NA"
+    
+    return missing_table
+    
+Na_table = missing_table()
 
-    return data
+def fetch_data(url):
+    res = Crawler.extract_html(url)
+    if not isinstance(res, BeautifulSoup):
+        print(f"Erreur : L'URL {url} n'a pas renvoyé un objet BeautifulSoup valide.")
+        return {'url': url}
+    
+    table = Crawler.find_element(res, tag='table', element_id='test-suite-results')
+    if table is None : 
+        print(f"bad {url}")
+    else : 
+        print(f"GOOD {url}")
+
+    try : 
+        data = {}
+        for row in table.findAll('tr'):
+            header = row.find('th').text
+            value = row.find('td').text
+            data[header] = value
+        return data 
+    except AttributeError : 
+        data = Na_table
+        return data 
 
 
 def merge_data(url, file_name):
-    html = crawler.extract_html(url)
-    result = crawler.find_element(html, tag='table', element_id='cputable')
-    result = result.find('tbody')
-    result = result.find_all('tr')
+
+    html = Crawler.extract_html(url)
+    result = Crawler.find_element(html, tag='table', element_id='cputable')
+    if result is None : 
+        print(url)
+    body = result.find('tbody')
+    rows = body.find_all('tr')
 
     base = re.search(r'(.*net/)', url).group(1)
     urls = []
 
-    for i in result:
-        a = i.find('a')
+    for row in rows:
+        a = row.find('a')
         if a and a.get('href'):
             urls.append(base + a.get('href'))
 
@@ -52,10 +80,6 @@ def merge_data(url, file_name):
 
     return df
 
+merge_data(url, file_name)
 
-
-
-print(merge_data(url, file_name))
-
-
-
+"video_lookup"
