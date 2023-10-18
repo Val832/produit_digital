@@ -1,10 +1,23 @@
+"""
+Scraping de données de benchmarks 
 
-import requests 
+Script qui permet d'extraire les données de benchmarks de composants informatiques.
+Les données de l'exctration sont disponibles dans le répertoire data. 
+
+Fonctions:
+    - extract_html: Récupère le contenu HTML.
+    - extract_table: Extrait les données d'un tableau.
+
+Auteur: [Val832]
+Date de création: 17/10/2023
+"""
+
 import re
-from tools import crawler, clean_df
-import pandas as pd
 
-urls = [
+from tools import Crawler
+
+# Liste des URL concernant les benchmarks des différents composants informatiques.
+URLS = [
     "https://www.cpubenchmark.net/cpu_list.php",
     "https://www.harddrivebenchmark.net/hdd_list.php",
     "https://www.videocardbenchmark.net/gpu_list.php",
@@ -13,59 +26,20 @@ urls = [
     "https://www.memorybenchmark.net/ram_list-ddr3.php"
 ]
 
+# Expression régulière pour extraire le nom du composant à partir de l'URL.
+REGEX_PATTERN = r"net\/(.*?)\.php"
 
-regex = "net\/(.*?)\.php"
-pattern = re.compile(rf"{regex}")
+for url in URLS:
 
-for url in urls : 
+    # Utilisation de l'expression régulière pour identifier le nom du composant depuis l'URL.
+    match = re.search(REGEX_PATTERN, url)
+    file_name = match.group(1) if match else 'unnamed'  # Nom du composant ou "unnamed" si non identifié.
 
-    file_name = pattern.search(url).group(1)
-    html = crawler.extract_html(url)
-    print(url)
+    # Extraction du contenu HTML depuis l'URL.
+    html_content = Crawler.extract_html(url)
 
-    df = crawler.extract_table(html, table_id= 'cputable')
-    df = clean_df.convert_str_na_to_nan(df, 'NA')
-    df = clean_df.drop_na(df)
+    # Extraction des données depuis le tableau présent dans le contenu HTML.
+    dataframe = Crawler.extract_table(html_content, table_id='cputable')
 
-    
-
-    result = crawler.find_element(html , tag = 'table', element_id= 'cputable' )
-    result = result.find('tbody')
-    result = result.find_all('tr')
-
-
-    base = re.search(r'(.*net/)', url).group(1)
-    urls  = []
-
-    for i in result : 
-
-        a = i.find('a')
-
-        for j in a : 
-            urls.append(base + a.get('href'))
-
-    for index, current_url in enumerate(urls):
-        urls[index] = current_url.replace("_lookup", "")
-    print(urls)
-    all_data = []
-
-    for i in urls : 
-
-        res = crawler.extract_html(i)
-        table  = crawler.find_element(res, tag = 'table', element_id = 'test-suite-results')
-
-        data = {}
-
-        for row in table.findAll('tr'):
-            header = row.find('th').text
-            value = row.find('td').text
-            data[header] = value
-        all_data.append(data)
-
-    df2 = pd.DataFrame(all_data)
-
-    df = result = pd.concat([df, df2], axis=1)
-    df.to_csv(f"../produit_digital/data/{file_name}.csv")
-
-
-
+    # Sauvegarde des données sous forme de fichier CSV associé au composant correspondant.
+    dataframe.to_csv(f"../produit_digital/data/{file_name}.csv")

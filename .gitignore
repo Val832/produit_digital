@@ -5,3 +5,6 @@
 
 # Ignore les Jupyter Notebook 
 *.ipynb
+
+# Ignore les changemtents de settings vscode 
+*.vscode
