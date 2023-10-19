@@ -1,0 +1,7 @@
+Sprint Backlog du 20/10/2023
+
+Réalisation de la maquette de l'interface VBA pour visualiser les différentes interfaces notamment saisie et utilisateur 
+et début de la réalisation de l'interface saisie
+Réalisation d'une documentation sur le besoin client pour mettre en place l'interface de saisie dans Excel 
+Scraping de plusieurs bases de données et première exploration de ces bases
+Réflexion sur un algorithme de prédiction
