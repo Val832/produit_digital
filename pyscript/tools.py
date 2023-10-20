@@ -1,3 +1,13 @@
+"""
+tools : Outils pour le traitement des données
+
+Objectif :
+-----------
+Le module vise à fournir un ensemble d'outils pour faciliter le traitement des données,
+depuis l'acquisition par le biais du web crawling jusqu'à la manipulation et la mise en forme
+des dataframes.
+"""
+
 from bs4 import BeautifulSoup
 import requests  
 import pandas as pd 
