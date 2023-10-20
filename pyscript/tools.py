@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests  
 import pandas as pd 
+from tqdm import tqdm
 
 class Crawler :
 
@@ -308,7 +309,7 @@ class clean_df :
         else:
             return df.dropna()
         
-class Merge : 
+class Merge :
 
     def missing_table (url): 
 
@@ -326,8 +327,6 @@ class Merge :
         try :
             res = Crawler.extract_html(url)
             table = Crawler.find_element(res, tag='table', element_id='test-suite-results')
-            if table : 
-                print(f"good {url}")
             data = {}
             for row in table.findAll('tr'):
                 header = row.find('th').text
@@ -335,6 +334,42 @@ class Merge :
                 data[header] = value
             return data 
         except: 
-            print(url)
             data = missing_table
             return data 
+        
+def tqdm_executor_map(executor, function, *args, **kwargs):
+    """
+    Une fonction pour exécuter une fonction de manière parallèle tout en affichant une barre de progression avec tqdm.
+
+    Arguments:
+    - executor : Un exécuteur de type concurrent.futures (ThreadPoolExecutor ou ProcessPoolExecutor).
+    - function : La fonction à exécuter en parallèle.
+    - *args : Les arguments à passer à la fonction.
+    - **kwargs : Les arguments clé/valeur à passer à la fonction.
+
+    Retourne :
+    - Une liste des résultats renvoyés par la fonction.
+    """
+
+    # Définition des codes de couleur pour la barre de progression.
+    DARK_GREEN = "\033[32m"
+    RED = "\033[91m"
+    BLUE = "\033[94m"
+    ENDC = "\033[0m"
+    
+    # Format personnalisé pour tqdm en utlisant les codes couleurs 
+    bar_format = "{l_bar}" + DARK_GREEN + "█{bar:25}░" + ENDC + " " + RED + "{n_fmt}/{total_fmt}" + ENDC + " " + BLUE + "[{rate_fmt} eta {remaining}]" + ENDC
+
+    # Utilise l'exécuteur pour exécuter la fonction en parallèle.
+    gen = executor.map(function, *args)
+    
+    # Si un total est fourni dans kwargs, il est utilisé. Sinon, il est laissé à None.
+    total = kwargs.get('total', None)
+    
+    # Enveloppe le générateur avec tqdm pour afficher la barre de progression.
+    return list(tqdm(gen, 
+                    desc="Processing data 🚀 ", 
+                    bar_format=bar_format,
+                    dynamic_ncols=True, 
+                    mininterval=0.25,
+                    total=total))
