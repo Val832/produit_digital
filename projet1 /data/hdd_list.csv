@@ -1683,7 +1683,7 @@
 1677,Seagate ST380012A,74.5 GB,247,10414,3.25,$76.00*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST380012A&id=17746,NA,NA,NA,NA
 1678,Seagate ST380012ACE,74.5 GB,265,10368,4.57,$57.95*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST380012ACE&id=18362,NA,NA,NA,NA
 1679,Seagate ST380012ACE,15 GB,245,10419,4.23,$57.95*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST380012ACE&id=1771,NA,NA,NA,NA
-1680,Seagate ST380013AS,74.5 GB,346,10037,8.87,$38.95*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST380013AS&id=1773,47 MBytes/Sec,46 MBytes/Sec,5 MBytes/Sec,1 MBytes/Sec
+1680,Seagate ST380013AS,74.5 GB,346,10037,8.87,$38.95*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST380013AS&id=1773,NA,NA,NA,NA
 1681,Seagate ST380023A,18.8 GB,232,10459,2.94,$79.00*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST380023A&id=1776,NA,NA,NA,NA
 1682,Seagate ST3802110AS,74.5 GB,379,9843,6.02,$63.00*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST3802110AS&id=1778,NA,NA,NA,NA
 1683,Seagate ST380215A,10.4 GB,314,10202,4.49,$69.95*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST380215A&id=1780,NA,NA,NA,NA
@@ -1700,44 +1700,44 @@
 1694,Seagate ST4000VN008,3.6 TB,"7,937",2738,49.61,$160.00,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST4000VN008&id=22618,769 MBytes/Sec,687 MBytes/Sec,720 MBytes/Sec,64 MBytes/Sec
 1695,Seagate ST4000VX007,3.6 TB,"4,568",3226,49.07,$93.10,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST4000VX007&id=14058,935 MBytes/Sec,267 MBytes/Sec,155 MBytes/Sec,15 MBytes/Sec
 1696,SEAGATE ST400FM0053,372.6 GB,"5,693",2922,19.10,$298.00*,https://www.harddrivebenchmark.net/hdd.php?hdd=SEAGATE%20ST400FM0053&id=13762,NA,NA,NA,NA
-1697,SEAGATE ST480FP0021,447.1 GB,"3,898",4086,29.98,$130.00*,https://www.harddrivebenchmark.net/hdd.php?hdd=SEAGATE%20ST480FP0021&id=9948,466 MBytes/Sec,405 MBytes/Sec,306 MBytes/Sec,23 MBytes/Sec
-1698,Seagate ST480HM000,447.1 GB,"3,623",4593,14.26,$254.09*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST480HM000&id=5139,380 MBytes/Sec,332 MBytes/Sec,285 MBytes/Sec,27 MBytes/Sec
+1697,SEAGATE ST480FP0021,447.1 GB,"3,898",4086,29.98,$130.00*,https://www.harddrivebenchmark.net/hdd.php?hdd=SEAGATE%20ST480FP0021&id=9948,NA,NA,NA,NA
+1698,Seagate ST480HM000,447.1 GB,"3,623",4593,14.26,$254.09*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST480HM000&id=5139,NA,NA,NA,NA
 1699,Seagate ST5000DM000,4.5 TB,793,8447,7.55,$104.99*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST5000DM000&id=9075,NA,NA,NA,NA
 1700,Seagate ST500DM002,97.6 GB,"1,400",7720,18.67,$74.99*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST500DM002&id=1785,NA,NA,NA,NA
 1701,Seagate ST500DM002,465.8 GB,720,8606,46.49,$15.49,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST500DM002&id=709,104 MBytes/Sec,98 MBytes/Sec,6 MBytes/Sec,1 MBytes/Sec
-1702,Seagate ST500DM005,465.7 GB,878,8307,12.55,$70.01*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST500DM005&id=1786,125 MBytes/Sec,119 MBytes/Sec,6 MBytes/Sec,1 MBytes/Sec
+1702,Seagate ST500DM005,465.7 GB,878,8307,12.55,$70.01*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST500DM005&id=1786,NA,NA,NA,NA
 1703,Seagate ST500DM009,465.8 GB,"1,082",8054,21.63,$49.99,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST500DM009&id=12898,172 MBytes/Sec,130 MBytes/Sec,7 MBytes/Sec,1 MBytes/Sec
 1704,Seagate ST500LM000,489 GB,651,8821,30.09,$21.63,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST500LM000&id=21059,78 MBytes/Sec,94 MBytes/Sec,15 MBytes/Sec,1 MBytes/Sec
-1705,Seagate ST500LM012,465.8 GB,618,8944,18.53,$33.36*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST500LM012&id=828,88 MBytes/Sec,81 MBytes/Sec,4 MBytes/Sec,0 MBytes/Sec
+1705,Seagate ST500LM012,465.8 GB,618,8944,18.53,$33.36*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST500LM012&id=828,NA,NA,NA,NA
 1706,Seagate ST500LM021,465.8 GB,"1,230",7893,66.69,$18.44,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST500LM021&id=7215,177 MBytes/Sec,158 MBytes/Sec,31 MBytes/Sec,1 MBytes/Sec
 1707,Seagate ST500LM030,465.8 GB,618,8946,30.90,$19.99,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST500LM030&id=13244,98 MBytes/Sec,69 MBytes/Sec,8 MBytes/Sec,0 MBytes/Sec
 1708,Seagate ST500LM034,465.8 GB,"1,003",8137,18.61,$53.88,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST500LM034&id=16221,155 MBytes/Sec,92 MBytes/Sec,36 MBytes/Sec,2 MBytes/Sec
 1709,Seagate ST500LT012,465.8 GB,682,8709,48.78,$13.99,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST500LT012&id=2370,101 MBytes/Sec,85 MBytes/Sec,7 MBytes/Sec,1 MBytes/Sec
 1710,Seagate ST500LT032,465.8 GB,645,8843,12.90,$50.00,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST500LT032&id=6075,94 MBytes/Sec,84 MBytes/Sec,5 MBytes/Sec,0 MBytes/Sec
-1711,Seagate ST500LX003,465.8 GB,626,8917,10.43,$60.00*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST500LX003&id=722,88 MBytes/Sec,81 MBytes/Sec,7 MBytes/Sec,1 MBytes/Sec
-1712,Seagate ST500LX012,465.8 GB,659,8792,4.33,$151.99*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST500LX012&id=9285,86 MBytes/Sec,87 MBytes/Sec,13 MBytes/Sec,1 MBytes/Sec
-1713,Seagate ST500LX025,465.8 GB,624,8922,5.29,$118.00*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST500LX025&id=14388,107 MBytes/Sec,58 MBytes/Sec,11 MBytes/Sec,1 MBytes/Sec
+1711,Seagate ST500LX003,465.8 GB,626,8917,10.43,$60.00*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST500LX003&id=722,NA,NA,NA,NA
+1712,Seagate ST500LX012,465.8 GB,659,8792,4.33,$151.99*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST500LX012&id=9285,NA,NA,NA,NA
+1713,Seagate ST500LX025,465.8 GB,624,8922,5.29,$118.00*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST500LX025&id=14388,NA,NA,NA,NA
 1714,Seagate ST500NM0011,465.8 GB,900,8279,30.02,$29.99,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST500NM0011&id=2688,125 MBytes/Sec,121 MBytes/Sec,9 MBytes/Sec,1 MBytes/Sec
 1715,Seagate ST500VM000,465.8 GB,806,8420,40.32,$20.00,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST500VM000&id=23034,117 MBytes/Sec,105 MBytes/Sec,5 MBytes/Sec,1 MBytes/Sec
 1716,Seagate ST500VT000,465.8 GB,693,8684,8.15,$85.00,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST500VT000&id=11055,100 MBytes/Sec,92 MBytes/Sec,6 MBytes/Sec,0 MBytes/Sec
 1717,SEAGATE ST600MM0006,558.9 GB,"1,165",7951,6.55,$177.99*,https://www.harddrivebenchmark.net/hdd.php?hdd=SEAGATE%20ST600MM0006&id=8074,NA,NA,NA,NA
 1718,Seagate ST640LM001,596.2 GB,560,9121,3.15,$178.00*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST640LM001&id=2362,NA,NA,NA,NA
-1719,Seagate ST750LM022,698.6 GB,613,8955,8.29,$74.00*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST750LM022&id=502,87 MBytes/Sec,81 MBytes/Sec,5 MBytes/Sec,0 MBytes/Sec
-1720,Seagate ST750LX003,698.6 GB,657,8795,5.15,$127.49*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST750LX003&id=240,95 MBytes/Sec,85 MBytes/Sec,6 MBytes/Sec,0 MBytes/Sec
+1719,Seagate ST750LM022,698.6 GB,613,8955,8.29,$74.00*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST750LM022&id=502,NA,NA,NA,NA
+1720,Seagate ST750LX003,698.6 GB,657,8795,5.15,$127.49*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST750LX003&id=240,NA,NA,NA,NA
 1721,Seagate ST8000DM004,7.3 TB,"4,117",3724,37.43,$109.99,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST8000DM004&id=14702,529 MBytes/Sec,389 MBytes/Sec,276 MBytes/Sec,11 MBytes/Sec
 1722,Seagate ST8000DX001,7.3 TB,"26,489",560,120.41,$219.99,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST8000DX001&id=33407,"2,379 MBytes/Sec","3,091 MBytes/Sec","2,066 MBytes/Sec",65 MBytes/Sec
 1723,SEAGATE ST900MM0006,838.4 GB,"1,230",7892,9.46,$130.00*,https://www.harddrivebenchmark.net/hdd.php?hdd=SEAGATE%20ST900MM0006&id=8110,NA,NA,NA,NA
 1724,Seagate ST91000640NS,931.5 GB,707,8648,7.07,$99.95*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST91000640NS&id=4609,NA,NA,NA,NA
-1725,Seagate ST9120817AS,109.7 GB,332,10116,4.20,$78.99*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST9120817AS&id=1799,44 MBytes/Sec,44 MBytes/Sec,4 MBytes/Sec,0 MBytes/Sec
+1725,Seagate ST9120817AS,109.7 GB,332,10116,4.20,$78.99*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST9120817AS&id=1799,NA,NA,NA,NA
 1726,Seagate ST9120821A,111.8 GB,245,10417,4.46,$54.99*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST9120821A&id=76,NA,NA,NA,NA
 1727,Seagate ST9120822A,111.8 GB,266,10364,3.75,$71.00*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST9120822A&id=1800,NA,NA,NA,NA
-1728,Seagate ST9120822AS,111.8 GB,257,10380,2.80,$92.00*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST9120822AS&id=1801,33 MBytes/Sec,35 MBytes/Sec,4 MBytes/Sec,0 MBytes/Sec
+1728,Seagate ST9120822AS,111.8 GB,257,10380,2.80,$92.00*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST9120822AS&id=1801,NA,NA,NA,NA
 1729,SEAGATE ST9146853SS,136.7 GB,"1,263",7848,5.93,$213.00*,https://www.harddrivebenchmark.net/hdd.php?hdd=SEAGATE%20ST9146853SS&id=7094,NA,NA,NA,NA
-1730,Seagate ST9160310AS,149 GB,396,9746,5.58,$70.99*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST9160310AS&id=1018,54 MBytes/Sec,53 MBytes/Sec,5 MBytes/Sec,0 MBytes/Sec
-1731,Seagate ST9160314AS,149 GB,301,10263,2.01,$149.95*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST9160314AS&id=1805,39 MBytes/Sec,40 MBytes/Sec,5 MBytes/Sec,0 MBytes/Sec
+1730,Seagate ST9160310AS,149 GB,396,9746,5.58,$70.99*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST9160310AS&id=1018,NA,NA,NA,NA
+1731,Seagate ST9160314AS,149 GB,301,10263,2.01,$149.95*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST9160314AS&id=1805,NA,NA,NA,NA
 1732,Seagate ST9160411AS,149 GB,462,9456,8.11,$56.99*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST9160411AS&id=17216,NA,NA,NA,NA
 1733,Seagate ST9160411AS,139 GB,426,9603,7.22,$58.99*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST9160411AS&id=1806,NA,NA,NA,NA
-1734,Seagate ST9160412AS,149 GB,486,9350,14.74,$32.99*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST9160412AS&id=1808,68 MBytes/Sec,63 MBytes/Sec,5 MBytes/Sec,0 MBytes/Sec
+1734,Seagate ST9160412AS,149 GB,486,9350,14.74,$32.99*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST9160412AS&id=1808,NA,NA,NA,NA
 1735,Seagate ST9160412ASG,149 GB,403,9708,6.20,$64.99*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST9160412ASG&id=1809,NA,NA,NA,NA
 1736,Seagate ST9160418ASG,148.8 GB,468,9428,10.89,$42.99*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST9160418ASG&id=1811,NA,NA,NA,NA
 1737,Seagate ST9160821A,144.1 GB,251,10402,8.38,$29.95*,https://www.harddrivebenchmark.net/hdd.php?hdd=Seagate%20ST9160821A&id=1812,NA,NA,NA,NA
