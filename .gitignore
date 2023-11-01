@@ -1,0 +1,14 @@
+# Ignore la mise en cache python 
+__pycache__/
+
+# Ignore les fichiers R 
+*.R
+
+# Ignore les Jupyter Notebook 
+*.ipynb
+
+# Ignore les changemtents de settings vscode 
+*.vscode
+
+# Ignore les csv (évite les problèmes de push nécessitant git lfs) 
+*.cscv
