@@ -2,9 +2,6 @@ import pandas as pd
 import unittest
 from src.df_manipulation.df_tools import create_column_from_match
 
-import unittest
-import pandas as pd
-
 class TestCreateColumnFromMatch(unittest.TestCase):
 
     def setUp(self):
