@@ -12,3 +12,10 @@ __pycache__/
 
 # Ignore les csv (évite les problèmes de push nécessitant git lfs) 
 *.cscv
+
+# add by Abdoul
+ME/
+ME/*.ipynb
+ME/*.csv
+.DS_STORE
+
