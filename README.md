@@ -2,7 +2,9 @@
 
 # Objectif
 
-Créer une application qui a pour but d'estimer le prix de votre bien immobilier situé à Paris sur l'application Airbnb.  Elle vous permettra de proposer votre logement au juste prix en fonction des caractéristiques et de la localité de votre bien.
+Créer une application qui a pour but d'estimer le prix de votre bien immobilier situé à Paris sur l'application Airbnb.
+Elle vous permettra de proposer votre logement au juste prix en fonction des caractéristiques et de la localité de votre
+bien.
 
 # Détails du développement de l'application
 
@@ -14,11 +16,13 @@ Créer une application qui a pour but d'estimer le prix de votre bien immobilier
 
         i. Identifier des variables utiles pour notre algorithme de prédiction.
         ii. Extraire des caractéristiques de certaines variables, par exemple dans la description du bien.
-        iii. Créer des nouvelles variables indicatrices qui affichent 1 si cette caractéristique est présente dans la description de ce bien ou 0 sinon.  
+        iii. Créer des nouvelles variables indicatrices qui affichent 1 si cette caractéristique est présente dans la 
+        description de ce bien ou 0 sinon.  
 
 # 2. Réaliser l'interface VBA
 
-    - Objectif : Disposer d'un formulaire VBA qui demande à l'utilisateur un certain nombre de caractéristiques sur son logement.
+    - Objectif : Disposer d'un formulaire VBA qui demande à l'utilisateur un certain nombre de caractéristiques sur
+    son logement.
 
     - Étapes : 
         
@@ -28,7 +32,8 @@ Créer une application qui a pour but d'estimer le prix de votre bien immobilier
 
 # 3. Réaliser l'algorithme de prédiction
 
-    - Objectif : Disposer d'un algorithme permettant de prédire la variable prix du bien en fonction de plusieurs variables explicatives données par l'utilisateur.
+    - Objectif : Disposer d'un algorithme permettant de prédire la variable prix du bien en fonction de plusieurs
+    variables explicatives données par l'utilisateur.
 
     - Étapes : 
 
