@@ -1,61 +1,37 @@
-# Les bonnes pratiques de git
+# Projet d'évaluation du prix d'un bien immobilier dans Paris dans l'application Airbnb
 
-Création d'un environnement virtuel (/environement/venv), cela nous permettra à tous de travailler avec la même version de python.
-Création d'un fichier requirements.txt, cela nous permettra d'avoir les même versions de packages, on évitera les " ça marche sur mon ordi pourtant..."
+# Objectif
 
-En bref, l'utilisation de ces pratiques nous permettra une facilité de partage et de collaboration. Mais aussi d'opérer des changements uniquement dans l'environnement virtuel ce qui a pour avantage de ne créer aucun conflit avec d'autres projets en cours utilisant aussi python.
+Créer une application qui a pour but d'estimer le prix de votre bien immobilier situé à Paris sur l'application Airbnb.  Elle vous permettra de proposer votre logement au juste prix en fonction des caractéristiques et de la localité de votre bien.
 
+# Détails du développement de l'application
 
+# 1. Nettoyage de la base de données
 
-à chaque installation de package :
+    - Objectif : Disposer d'une base de données claire qui permet ensuite de choisir les variables explicatives à prendre.
 
-    quand j'installe un package :
-    pip install
+    - Étapes : 
 
-    cela me permet de le rendre dispo pour les autres développeurs :
-    pip freeze > requirements.txt
+        i. Identifier des variables utiles pour notre algorithme de prédiction.
+        ii. Extraire des caractéristiques de certaines variables, par exemple dans la description du bien.
+        iii. Créer des nouvelles variables indicatrices qui affichent 1 si cette caractéristique est présente dans la description de ce bien ou 0 sinon.  
 
-    les autres développeurs se mettent à jour :
-    pip install -r requirements.txt
+# 2. Réaliser l'interface VBA
 
+    - Objectif : Disposer d'un formulaire VBA qui demande à l'utilisateur un certain nombre de caractéristiques sur son logement.
 
-Une branche pour chacun d'entre nous a été créée
+    - Étapes : 
+        
+        i. Réaliser une interface de saisie qui demande à l'utilisateur des informations sur son logement.
+        ii. Réaliser une interface de résultats montrant à l'utilisateur une estimation de son bien immobilier.
+        iii. Connecter ces deux interfaces VBA à un script Python calculant le prix du bien immobilier de l'utilisateur.
 
-    Vous pouvez afficher toutes les branches dispo avec la commande :
-    git branch
+# 3. Réaliser l'algorithme de prédiction
 
-    Pour vous placer sur votre branche de dev :
+    - Objectif : Disposer d'un algorithme permettant de prédire la variable prix du bien en fonction de plusieurs variables explicatives données par l'utilisateur.
 
-    git checkout <branch_name>
+    - Étapes : 
 
-
-Avant de bosser sur votre branche, récupérez les changements opérés sur le dépôt distant
-
-    git pull origin
-
-    On active l'environnement virtuel nommé "venv" pour ce projet
-
-    Windows : venv\Scripts\activate
-    Unix/MacOS : source venv/bin/activate
-
-
-Si un nouveau fichier est créé
-
-    git add file_name ou git add . permet d'ajouter tous les nouveaux fichiers crées
-
-    git commit -m "message"
-
-    Quand vous avez fini de bosser, envoyez les modifications vers le dépôt distant
-
-    git push origin
-
-
-Phase de test et demande de fusion
-
-    Avant de faire une demande de merge on s'assure que nos modifications n'ont pas entraîné de régressions par rapport aux tests.
-
-    Si tout est ok aller dans git lab :
-
-    Dans la barre latérale gauche onglet requêtes de fusion -> nouvelle requête de fusion
-    séléction de la branche source donc votre branche de dev -> comparer les branches et continuer
-
+        i. Réaliser un premier algorithme de régression linéaire multiple.
+        ii. Réaliser d'autres algorithmes de prédiction et choisir quel est le plus adapté à ces données.
+        iii. Réaliser des tests unitaires pour valider la robustesse de l'algorithme choisi.
