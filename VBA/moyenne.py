@@ -4,8 +4,14 @@ import xlwings as xw
 
 
 def meanExcel(path, sheetName):
+    somme = 0
     data = pd.read_excel(path, sheet_name=sheetName)
-    return pd.DataFrame(np.mean(data, axis=0)) 
+    #on somme toutes les valeurs
+    for colonne in range(data.shape[1]):
+        somme += data.iloc[0,colonne]
+    #on divise par le nombre de colonne, on obtient ainsi la moyenne
+    return (somme / data.shape[1])
+
 # J'ai rajouté axis=0 suite à un warning de numpy qui indique que prochainement préciser cet
 # argument sera obligatoire donc mieux pour la pérennité du code 
 
@@ -24,14 +30,14 @@ def writeToExcel(path, moy, sheet_name):
         # Si c'est le cas, on sélection cette feuille et on efface son contenu actuel
         if sheet_name in sheet_names:
             sheet = workbook.sheets[sheet_name]
-            sheet.clear()
+            #sheet.clear()
         else:
             # Si la feuille cible n'existe pas, on la crée
             sheet = workbook.sheets.add(sheet_name)
 
         # On écrit le df 'moy' dans la feuille cible.
         # On écrit les données à partir de la cellule A1.
-        sheet.range('A1').value = moy
+        sheet.range('F10').value = moy
 
         # On sauvegarde le classeur.
         workbook.save()
@@ -40,7 +46,9 @@ def writeToExcel(path, moy, sheet_name):
 
 # Tout ce qui est strictement constant et hors fonction en python est toujours en majuscule ;)
 PATH = 'FormulaireAIRBNB.xlsm'
-SHEET_NAME = 'Données'
+SHEET_NAME = 'Donnees'
 moy = meanExcel(PATH, SHEET_NAME)
+print(moy)
+writeToExcel(PATH, moy, sheet_name='Dashboard')
 
-writeToExcel(PATH, moy, sheet_name='res')
+
