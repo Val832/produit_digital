@@ -38,8 +38,8 @@ def writeToExcel(path, moy, sheet_name):
         # On ferme le classeur.
         workbook.close()
 
-# Tout ce qui est strictement constant et hors fonction en python est toujouts en majuscule ;)
-PATH = 'VBA/FormulaireAIRBNB.xlsm'
+# Tout ce qui est strictement constant et hors fonction en python est toujours en majuscule ;)
+PATH = 'FormulaireAIRBNB.xlsm'
 SHEET_NAME = 'Données'
 moy = meanExcel(PATH, SHEET_NAME)
 
