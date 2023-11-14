@@ -1,54 +1,83 @@
 import pandas as pd
 import numpy as np 
 import xlwings as xw
+import csv
+
+def convertStrToFloat(list_data):
+    for value in range(len(list_data)):
+        list_data[value]=float(list_data[value])
+    return(list_data)
 
 
-def meanExcel(path, sheetName):
+
+def mean(list_data):
     somme = 0
-    data = pd.read_excel(path, sheet_name=sheetName)
-    #on somme toutes les valeurs
-    for colonne in range(data.shape[1]):
-        somme += data.iloc[0,colonne]
-    #on divise par le nombre de colonne, on obtient ainsi la moyenne
-    return (somme / data.shape[1])
+    for value in range(len(list_data)):
+        somme+=list_data[value]
+    return (somme / len(list_data))
 
-# J'ai rajouté axis=0 suite à un warning de numpy qui indique que prochainement préciser cet
-# argument sera obligatoire donc mieux pour la pérennité du code 
-
-
-def writeToExcel(path, moy, sheet_name):
-
-    # On  ouvre l'application Excel sans l'afficher à l'écran (visible=False)
-    with xw.App(visible=False) as app:
-        # On ouvre le classeur Excel indiqué par le chemin 'path'
-        workbook = app.books.open(path)
-        
-        # On récupère les noms des feuilles existantes dans le classeur
-        sheet_names = [sheet.name for sheet in workbook.sheets]
-        
-        # On vérifie si la feuille cible existe
-        # Si c'est le cas, on sélection cette feuille et on efface son contenu actuel
-        if sheet_name in sheet_names:
-            sheet = workbook.sheets[sheet_name]
-            #sheet.clear()
-        else:
-            # Si la feuille cible n'existe pas, on la crée
-            sheet = workbook.sheets.add(sheet_name)
-
-        # On écrit le df 'moy' dans la feuille cible.
-        # On écrit les données à partir de la cellule A1.
-        sheet.range('F10').value = moy
-
-        # On sauvegarde le classeur.
-        workbook.save()
-        # On ferme le classeur.
-        workbook.close()
-
-# Tout ce qui est strictement constant et hors fonction en python est toujours en majuscule ;)
-PATH = 'FormulaireAIRBNB.xlsm'
-SHEET_NAME = 'Donnees'
-moy = meanExcel(PATH, SHEET_NAME)
-print(moy)
-writeToExcel(PATH, moy, sheet_name='Dashboard')
+# read csv and keep the result in a list 
+def readExcel(path):
+    with open(path) as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=';')
+        line_count = 0
+        for row in csv_reader:
+            a=row
+            line_count += 1
+    return(a)
 
 
+def writeToExcel(path, moy, cell, sheet_name):
+    # Ouvrir le classeur Excel
+    wb = xw.Book(path)
+    # Sélectionner la feuille spécifiée
+    sheet = wb.sheets[sheet_name]
+    # Écrire la moyenne dans la cellule spécifiée
+    sheet.range(cell).value = moy
+    # Enregistrez le classeur Excel
+    wb.save()
+    # Fermez le classeur Excel
+    wb.close()
+
+    
+def convertir_virgule(chaine):
+    # Remplace la virgule par un point et convertit en nombre à virgule flottante
+    try:
+        resultat = float(chaine.replace(',', '.'))
+        return resultat
+    except ValueError:
+        print("Erreur : La chaîne n'est pas au bon format.")
+        return None
+    
+
+def convertir_virgule_chaine(nombre):
+    # Convertit le nombre en chaîne avec une virgule comme séparateur décimal
+    try:
+        resultat = "{:.1f}".format(nombre).replace('.', ',')
+        return resultat
+    except ValueError:
+        print("Erreur : La valeur n'est pas au bon format.")
+        return None
+
+
+
+PATH = r'C:\Users\garan\Desktop\produit_digital\VBA\data.csv'
+SHEET_NAME='data'
+CELL='A3'
+
+DATA = readExcel(PATH)
+print(DATA)
+
+DATA = convertStrToFloat(DATA)
+MOY = str(mean(DATA))
+writeToExcel(PATH, MOY, CELL, SHEET_NAME)
+
+
+#def convertir_virgule(chaine):
+#   resultat = float(chaine.replace(',', '.'))
+#   return resultat
+
+# Exemple d'utilisation
+#valeur_chaine = 2,2
+#resultat_conversion = convertir_virgule(valeur_chaine)
+#print(resultat_conversion)
