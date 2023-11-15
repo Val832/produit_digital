@@ -3,81 +3,107 @@ import numpy as np
 import xlwings as xw
 import csv
 
-def convertStrToFloat(list_data):
-    for value in range(len(list_data)):
-        list_data[value]=float(list_data[value])
-    return(list_data)
+
+def convert_str_to_float(list_data):
+    """
+    Converts each string element in the input list to a floating-point number.
+
+    Parameters:
+    - list_data (list): A list containing string representations of numbers.
+
+    Returns:
+    list: A new list where each element is converted to a float.
+    """
+    for i in range(len(list_data)):
+        list_data[i] = float(list_data[i])
+    return list_data
 
 
+def calculate_mean(list_data):
+    """
+    Calculates the mean (average) of a list of numeric values.
 
-def mean(list_data):
-    somme = 0
-    for value in range(len(list_data)):
-        somme+=list_data[value]
-    return (somme / len(list_data))
+    Parameters:
+    - list_data (list): A list containing numeric values.
 
-# read csv and keep the result in a list 
-def readExcel(path):
+    Returns:
+    float or str: The mean of the input list, or a message indicating that the list is empty.
+    """
+    if len(list_data) == 0:
+        return "List is empty."
+
+    total_sum = sum(list_data)
+    return total_sum / len(list_data)
+
+
+def read_csv(path):
+    """
+    Reads a CSV file and returns the last row as a list.
+
+    Parameters:
+    - path (str): The path to the CSV file.
+
+    Returns:
+    list: A list containing the data from the last row of the CSV file.
+
+    Note:
+    This function assumes that the CSV file uses ';' as the delimiter.
+
+    If the CSV file is empty, the function will return an empty list.
+    """
     with open(path) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=';')
-        line_count = 0
         for row in csv_reader:
-            a=row
-            line_count += 1
-    return(a)
+            # Assuming the CSV file has multiple rows, 'last_row' will contain the last row
+            last_row = row
+    return last_row
 
 
-def writeToExcel(path, moy, cell, sheet_name):
-    # Ouvrir le classeur Excel
+def write_to_excel(path, value, cell, sheet_name):
+    """
+    Writes a value to a specified cell on a specified sheet in an Excel workbook.
+
+    Parameters:
+    - path (str): The path to the Excel workbook.
+    - value (float): The value to be written to the Excel workbook.
+    - cell (str): The cell reference where the value will be written (e.g., 'A1').
+    - sheet_name (str): The name of the sheet where the value will be written.
+
+    Returns:
+    None
+
+    Note:
+    This function utilizes the xlwings library for interacting with Excel.
+    """
+    # Open the Excel workbook
     wb = xw.Book(path)
-    # Sélectionner la feuille spécifiée
+    # Select the specified sheet
     sheet = wb.sheets[sheet_name]
-    # Écrire la moyenne dans la cellule spécifiée
-    sheet.range(cell).value = moy
-    # Enregistrez le classeur Excel
+    # Write the value to the specified cell
+    sheet.range(cell).value = value
+    # Save the Excel workbook
     wb.save()
-    # Fermez le classeur Excel
+    # Close the Excel workbook
     wb.close()
 
-    
-def convertir_virgule(chaine):
-    # Remplace la virgule par un point et convertit en nombre à virgule flottante
-    try:
-        resultat = float(chaine.replace(',', '.'))
-        return resultat
-    except ValueError:
-        print("Erreur : La chaîne n'est pas au bon format.")
-        return None
-    
-
-def convertir_virgule_chaine(nombre):
-    # Convertit le nombre en chaîne avec une virgule comme séparateur décimal
-    try:
-        resultat = "{:.1f}".format(nombre).replace('.', ',')
-        return resultat
-    except ValueError:
-        print("Erreur : La valeur n'est pas au bon format.")
-        return None
 
 
+# Define file paths and constants
+file_path = r'C:\Users\garan\Desktop\produit_digital\VBA\data.csv'
+sheet_name = 'data'
+cell_reference = 'A3'
 
-PATH = r'C:\Users\garan\Desktop\produit_digital\VBA\data.csv'
-SHEET_NAME='data'
-CELL='A3'
+# Read data from CSV
+data_from_csv = read_csv(file_path)
+print("Data from CSV:", data_from_csv)
 
-DATA = readExcel(PATH)
-print(DATA)
+# Convert string data to float
+data_as_float = convert_str_to_float(data_from_csv)
 
-DATA = convertStrToFloat(DATA)
-MOY = str(mean(DATA))
-writeToExcel(PATH, MOY, CELL, SHEET_NAME)
+# Calculate mean and convert to string
+mean_value = calculate_mean(data_as_float)
+mean_as_str = str(mean_value)
+print("Mean:", mean_as_str)
 
-
-#def convertir_virgule(chaine):
-#   resultat = float(chaine.replace(',', '.'))
-#   return resultat
-
-# Exemple d'utilisation
-#valeur_chaine = 2,2
-#resultat_conversion = convertir_virgule(valeur_chaine)
-#print(resultat_conversion)
+# Write mean value to Excel
+write_to_excel(file_path, mean_as_str, cell_reference, sheet_name)
