@@ -89,7 +89,8 @@ def write_to_excel(path, value, cell, sheet_name):
 
 
 # Define file paths and constants
-file_path = r'C:\Users\garan\Desktop\produit_digital\VBA\data.csv'
+file_path = 'data.csv'
+
 sheet_name = 'data'
 cell_reference = 'A3'
 
