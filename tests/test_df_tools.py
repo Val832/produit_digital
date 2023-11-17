@@ -60,9 +60,6 @@ class TestCreateColumnFromMatch(unittest.TestCase):
         result_df = create_column_from_match(self.df, 'text', words_dictionnary={})
         self.assertEqual(result_df.shape[1], self.df.shape[1])  # No new columns should be added
 
-if __name__ == '__main__':
-    unittest.main()
-
 class TestCountAmenities(unittest.TestCase):
     def setUp(self):
         # Set up sample data for testing
