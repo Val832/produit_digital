@@ -1,8 +1,10 @@
 import pandas as pd 
+import re
 from collections import defaultdict
 import ast
 
-def create_column_from_match(df, reference_column, word=None, words_list=None):
+
+def create_column_from_match(df, reference_column, word=None, words_dictionnary=None):
     """
     This function creates one or more indicator columns in a pandas DataFrame 
     based on regex matching of words in a reference column.
@@ -16,59 +18,72 @@ def create_column_from_match(df, reference_column, word=None, words_list=None):
         The name of the column in which to search for words.
 
     word : str, optional
-        The word to search for in the reference column. If provided, an indicator column 
+        A single word to search for in the reference column. If provided, an indicator column 
         with this name will be added to the DataFrame.
 
-    words_list : list of str, optional
-        List of words to search for in the reference column. For each word, an indicator 
-        column will be added to the DataFrame.
+    words_dictionnary : dict, optional
+        A dictionary where each key-value pair consists of a column name and a corresponding word 
+        or list of words to search for in the reference column. An indicator column for each key
+        will be added to the DataFrame.
 
     Returns:
     --------
     df : pd.DataFrame
-        DataFrame with the new indicator columns added.
+        The DataFrame with the new indicator columns added.
 
     Remarks:
     ----------
-    - At least one of the 'word' or 'words_list' arguments must be provided.
-    - Only one of the 'word' or 'words_list' arguments should be provided, but not both simultaneously.
-    - Word search is case insensitive due to (?i) in the regex expression.
+    - At least one of the 'word' or 'words_dictionnary' arguments must be provided.
+    - Only one of the 'word' or 'words_dictionnary' arguments should be provided, not both.
+    - The word search is case insensitive due to the use of (?i) in the regex expression.
     """
 
-    # The argument df must be a pandas.DataFrame
+    # Verify that df is a pandas DataFrame
     if not isinstance(df, pd.DataFrame):
-        raise TypeError("The df argument must take a pandas.DataFrame object as input")
+        raise TypeError("The df argument must be a pandas.DataFrame object")
 
+    # Ensure the reference column exists in the DataFrame
     if reference_column not in df.columns:
         raise ValueError(f"The reference column '{reference_column}' is not present in the DataFrame.")
 
-    # At least one parameter must be provided
-    if word is None and words_list is None:
-        raise ValueError("You must provide a word or a list of words")
+    # Ensure that either 'word' or 'words_dictionnary' is provided
+    if word is None and words_dictionnary is None:
+        raise ValueError("A word or a words dictionary must be provided")
 
-    # Both parameters cannot be provided at the same time
-    if word and words_list:
-        raise ValueError("If you have multiple columns to create, please include them in a list and use only the 'words_list' argument")
+    # Prevent both 'word' and 'words_dictionnary' from being provided simultaneously
+    if word and words_dictionnary:
+        raise ValueError("Provide either a single word or a dictionary of words, not both")
 
     if word:
-        # Type error handling
+        # Check that word is a string
         if not isinstance(word, str):
-            raise TypeError("The word argument must be of type 'str'")
-        # Create a dummy column from the provided word if a match is found with dummies
-        # (?i) allows matching regardless of capitalization
-        df[word] = df[reference_column].str.contains(rf'(?i){word}').astype(int)
+            raise TypeError("The word argument must be a string")
+        # Create an indicator column for the single provided word
+        df[word] = df[reference_column].str \
+                                       .contains(rf'(?i){word}') \
+                                       .astype(int)
 
     else:
-        # Type error handling
-        if not isinstance(words_list, list):
-            raise TypeError("The words argument takes a list as input")
+        # Check that words_dictionnary is a dictionary
+        if not isinstance(words_dictionnary, dict):
+            raise TypeError("The words_dictionnary argument must be a dictionary")
 
-        for i in words_list:
-            if not isinstance(i, str):
-                raise TypeError("The words_list argument only takes a list containing 'str' type objects as input")
-        # Create dummy columns from the provided list of words if a match is found
-        for new_column in words_list:
-            df[new_column] = df[reference_column].str.contains(rf'(?i){new_column}').astype(int)
+        for col_name, words_to_match in words_dictionnary.items():
+            if not words_to_match:
+                # Handle empty word list case by setting the column to 0
+                df[col_name] = 0
+            else:
+                if isinstance(words_to_match, list):
+                    # Create a regex pattern from a list of words
+                    regex_pattern = '|'.join([re.escape(word) for word in words_to_match])
+                    df[col_name] = df[reference_column].str \
+                                                       .contains(rf'(?i){regex_pattern}', na=False) \
+                                                       .astype(int) 
+                else:
+                    # Handle a single word string
+                    df[col_name] = df[reference_column].str \
+                                                       .contains(rf'(?i){words_to_match}') \
+                                                       .astype(int)
 
     return df
 
@@ -109,7 +124,11 @@ def count_amenities(df_rbnb):
             distinct_amenities[amenity] += 1
 
     # Sort and create a DataFrame from the dictionary
-    sorted_amenities = sorted(distinct_amenities.items(), key=lambda x: x[1], reverse=True)
-    df_amenities = pd.DataFrame(sorted_amenities, columns=['Amenity', 'Frequency'])
+    sorted_amenities = sorted(distinct_amenities.items(), 
+                              key=lambda x: x[1], 
+                              reverse=True)
+    
+    df_amenities = pd.DataFrame(sorted_amenities, 
+                                columns=['Amenity', 'Frequency'])
 
     return df_amenities
