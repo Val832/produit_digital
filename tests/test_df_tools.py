@@ -13,17 +13,23 @@ class TestCreateColumnFromMatch(unittest.TestCase):
         # Test creating a column based on a single word match
         result_df = create_column_from_match(self.df, 'text', word='hello')
         self.assertIn('hello', result_df.columns)  # Check if 'hello' column is created
-        self.assertListEqual(list(result_df['hello']), [1, 1, 0, 0])  # Verify the column values
-
+        self.assertListEqual(list(result_df['hello']), [1, 1, 0, 0, 0])  # Verify the column values
 
     def test_words_dictionnary(self):
         # Test creating multiple columns based on a dictionary of words
-        words_dict = {'hello_col': ['hello'], 'world_col': ['world',"GLOB"], 'jacuzzi_col': ['jacuzzi']}
+        words_dict = {'hello_col': ['hello'], 'world_col': ['world', "GLOB"], 'jacuzzi_col': ['jacuzzi']}
         result_df = create_column_from_match(self.df, 'text', words_dictionnary=words_dict)
+
+        # Expected values for each column based on the words_dict and the provided DataFrame
+        expected_values_dict = {
+            'hello_col': [1, 1, 0, 0, 0],  # 'hello' is in the first two texts
+            'world_col': [1, 0, 1, 1, 1],  # 'world' or 'GLOB' is in all but the second text
+            'jacuzzi_col': [0, 0, 0, 1, 0]  # 'jacuzzi' is in the fourth text
+        }
+
         # Check for each key in dictionary if the corresponding column is created and verify its values
-        for col_name, words in words_dict.items():
+        for col_name, expected_values in expected_values_dict.items():
             self.assertIn(col_name, result_df.columns)
-            expected_values = [int(any(word in text.lower() for word in words)) for text in self.df['text']]
             self.assertListEqual(list(result_df[col_name]), expected_values)
 
     def test_invalid_df(self):
