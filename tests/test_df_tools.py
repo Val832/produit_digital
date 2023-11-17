@@ -15,6 +15,7 @@ class TestCreateColumnFromMatch(unittest.TestCase):
         self.assertIn('hello', result_df.columns)  # Check if 'hello' column is created
         self.assertListEqual(list(result_df['hello']), [1, 1, 0, 0])  # Verify the column values
 
+
     def test_words_dictionnary(self):
         # Test creating multiple columns based on a dictionary of words
         words_dict = {'hello_col': ['hello'], 'world_col': ['world',"GLOB"], 'jacuzzi_col': ['jacuzzi']}
@@ -42,6 +43,7 @@ class TestCreateColumnFromMatch(unittest.TestCase):
 
     def test_both_word_and_dictionnary(self):
         # Test the function when both a single word and a dictionary are provided
+
         with self.assertRaises(ValueError):
             create_column_from_match(self.df, 'text', word='hello', words_dictionnary={'world_col': ['world']})
 
@@ -49,6 +51,7 @@ class TestCreateColumnFromMatch(unittest.TestCase):
         # Test the function with a non-string type for the word parameter
         with self.assertRaises(TypeError):
             create_column_from_match(self.df, 'text', word=123)
+
 
     def test_invalid_words_dictionnary_type(self):
         # Test the function with an invalid type for the words_dictionnary parameter
