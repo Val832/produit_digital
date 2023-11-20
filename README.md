@@ -30,7 +30,7 @@ De plus, un dictionnaire des variables de la base de données est disponible dan
 
 ## Détails des étapes de développement
 
-## 1. Préparation de la base de données
+### 1. Préparation de la base de données
 
 * **Objectif** : Disposer d'une base de données claire qui permet ensuite de choisir les variables explicatives à prendre.
 
@@ -39,7 +39,7 @@ De plus, un dictionnaire des variables de la base de données est disponible dan
   ii. Corriger les valeurs manquantes et les valeurs extrêmes.  
   iii. Créer des nouvelles variables indicatrices qui affichent 1 si cette caractéristique est présente dans la description de ce bien ou 0 sinon.  
 
-## 2. Réaliser l'algorithme de prédiction
+### 2. Réaliser l'algorithme de prédiction
 
 * **Objectif** : Prédire le prix d'un bien en fonction de plusieurs variables explicatives données par l'utilisateur dans le formulaire.
 
