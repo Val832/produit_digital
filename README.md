@@ -24,9 +24,9 @@ De plus, un dictionnaire des variables de la base de données est disponible dan
 * **Objectif** : Recueillir un certain nombre de caractéristiques sur votre logement pour pouvoir fournir celles-ci à l'algorithme de prédiction qui vous fournira ensuite une estimation de votre bien immobilier.
 
 * **Étapes** :   
-  `i. Dans la feuille Dashboard du fichier Excel FormulaireAIRBNB.xlsm, cliquez sur le bouton « Estimer le prix d'une nuit dans mon bien à Paris, sur AirBNB ».`  
-  `ii. Renseignez les différentes informations demandées sur votre logement.`  
-  `iii. Cliquez sur Valider dans le formulaire pour voir apparaître le prix auquel vous pouvez louer votre bien pour une nuit.`  
+  i. Dans la feuille Dashboard du fichier Excel FormulaireAIRBNB.xlsm, cliquez sur le bouton « Estimer le prix d'une nuit dans mon bien à Paris, sur AirBNB ».  
+  ii. Renseignez les différentes informations demandées sur votre logement.  
+  iii. Cliquez sur Valider dans le formulaire pour voir apparaître le prix auquel vous pouvez louer votre bien pour une nuit.  
 
 ## Détails des étapes de développement
 
@@ -35,18 +35,18 @@ De plus, un dictionnaire des variables de la base de données est disponible dan
 * **Objectif** : Disposer d'une base de données claire qui permet ensuite de choisir les variables explicatives à prendre.
 
 * **Étapes** :  
-  `i. Sélectionner les variables choisies utiles à la prédiction du prix et standardiser le nom de ces variables.`  
-  `ii. Corriger les valeurs manquantes et les valeurs extrêmes.`  
-  `iii. Créer des nouvelles variables indicatrices qui affichent 1 si cette caractéristique est présente dans la description de ce bien ou 0 sinon.`  
+  i. Sélectionner les variables choisies utiles à la prédiction du prix et standardiser le nom de ces variables.  
+  ii. Corriger les valeurs manquantes et les valeurs extrêmes.  
+  iii. Créer des nouvelles variables indicatrices qui affichent 1 si cette caractéristique est présente dans la description de ce bien ou 0 sinon.  
 
 ## 2. Réaliser l'algorithme de prédiction
 
 * **Objectif** : Prédire le prix d'un bien en fonction de plusieurs variables explicatives données par l'utilisateur dans le formulaire.
 
 * **Étapes** :  
-  `i. Réaliser plusieurs modèles de prédiction : régression linéaire, Ridge, LASSO et XGBOOST.`  
-  `ii. Comparer leurs performances pour déterminer lequel de ces modèles est le plus efficace.`  
-  `iii. Réaliser des tests unitaires pour valider la robustesse de l'algorithme choisi.`  
+  i. Réaliser plusieurs modèles de prédiction : régression linéaire, Ridge, LASSO et XGBOOST.  
+  ii. Comparer leurs performances pour déterminer lequel de ces modèles est le plus efficace.  
+  iii. Réaliser des tests unitaires pour valider la robustesse de l'algorithme choisi.  
 
 ## Remarques importantes :
 
