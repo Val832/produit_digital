@@ -1,49 +1,60 @@
 # Projet d'évaluation du prix d'un bien immobilier dans Paris dans l'application Airbnb
 
-# Objectif
+## Objectif
 
-Créer une application qui a pour but d'estimer le prix de votre bien immobilier situé à 
-Paris sur l'application Airbnb. Elle vous permettra de proposer votre logement au juste 
-prix en fonction des caractéristiques et de la localité de votre bien.
+Créer une application qui a pour but d'estimer le prix de votre bien immobilier situé à Paris sur l'application Airbnb.  Elle vous permettra de proposer votre logement au juste prix en fonction des caractéristiques et de la localité de votre bien.
 
-# Détails du développement de l'application
+## Détails des dossiers et fichiers
 
-# 1. Nettoyage de la base de données
+* VBA : Dossier contenant le fichier Excel FormulaireAIRBNB.xlsm
+* data : Dossier contenant des fichiers de nettoyage de la base de données
+* src : Dossier source. Il contient deux sous-dossiers :   
+        - data_science : Sous-dossier contenant les scripts pour réaliser le modèle.  
+        - df_manipulation : Sous-dossier contenant les scripts pour la transformation de la base.  
+* tests : Dossier contenant les tests unitaires.
+* utils : Dossier contenant un fichier txt donnant la liste des variables indicatrices créées dans la base de données.
+* venv : Dossier contenant l'environnement virtuel
+* README.txt : Fichier présentant l'organisation du projet et aidant à la manipulation des fichiers.
+* requirements.txt : Fichier listant les packages Python requis pour pouvoir utiliser l'application.  
 
-    - Objectif : Disposer d'une base de données claire qui permet ensuite de choisir les
-    variables explicatives à prendre.
+De plus, un dictionnaire des variables de la base de données est disponible dans le wiki. 
 
-    - Étapes : 
+## Prise en main de l'application
 
-        i. Identifier des variables utiles pour notre algorithme de prédiction.
-        ii. Extraire des caractéristiques de certaines variables, par exemple dans la 
-        description du bien.
-        iii. Créer des nouvelles variables indicatrices qui affichent 1 si cette 
-        caractéristique est présente dans la description de ce bien ou 0 sinon.  
+* **Objectif** : Recueillir un certain nombre de caractéristiques sur votre logement pour pouvoir fournir celles-ci à l'algorithme de prédiction qui vous fournira ensuite une estimation de votre bien immobilier.
 
-# 2. Réaliser l'interface VBA
+* **Étapes** :   
+  i. Dans la feuille Dashboard du fichier Excel FormulaireAIRBNB.xlsm, cliquez sur le bouton « Estimer le prix d'une nuit dans mon bien à Paris, sur AirBNB ».  
+  ii. Renseignez les différentes informations demandées sur votre logement.  
+  iii. Cliquez sur Valider dans le formulaire pour voir apparaître le prix auquel vous pouvez louer votre bien pour une nuit.  
 
-    - Objectif : Disposer d'un formulaire VBA qui demande à l'utilisateur un certain 
-    nombre de caractéristiques sur son logement.
+## Détails des étapes de développement
 
-    - Étapes : 
-        
-        i. Réaliser une interface de saisie qui demande à l'utilisateur des informations
-        sur son logement.
-        ii. Réaliser une interface de résultats montrant à l'utilisateur une estimation
-        de son bien immobilier.
-        iii. Connecter ces deux interfaces VBA à un script Python calculant le prix du
-        bien immobilier de l'utilisateur.
+### 1. Préparation de la base de données
 
-# 3. Réaliser l'algorithme de prédiction
+* **Objectif** : Disposer d'une base de données claire qui permet ensuite de choisir les variables explicatives à prendre.
 
-    - Objectif : Disposer d'un algorithme permettant de prédire la variable prix du bien
-    en fonction de plusieurs variables explicatives données par l'utilisateur.
+* **Étapes** :  
+  i. Sélectionner les variables choisies utiles à la prédiction du prix et standardiser le nom de ces variables.  
+  ii. Corriger les valeurs manquantes et les valeurs extrêmes.  
+  iii. Créer des nouvelles variables indicatrices qui affichent 1 si cette caractéristique est présente dans la description de ce bien ou 0 sinon.  
 
-    - Étapes : 
+### 2. Réaliser l'algorithme de prédiction
 
-        i. Réaliser un premier algorithme de régression linéaire multiple.
-        ii. Réaliser d'autres algorithmes de prédiction et choisir quel est le plus
-        adapté à ces données.
-        iii. Réaliser des tests unitaires pour valider la robustesse de l'algorithme
-        choisi.
+* **Objectif** : Prédire le prix d'un bien en fonction de plusieurs variables explicatives données par l'utilisateur dans le formulaire.
+
+* **Étapes** :  
+  i. Réaliser plusieurs modèles de prédiction : régression linéaire, Ridge, LASSO et XGBOOST.  
+  ii. Comparer leurs performances pour déterminer lequel de ces modèles est le plus efficace.  
+  iii. Réaliser des tests unitaires pour valider la robustesse de l'algorithme choisi.  
+
+## Remarques importantes :
+
+* Veillez à activer votre environnement virtuel si vous en avez un :  
+  - Sur Mac / Linux  
+  source venv/bin/activate  
+  - Sur Windows  
+  .\venv\Scripts\activate  
+
+* Assurez-vous que toutes les dépendances requises sont installées en utilisant  
+  pip install -r requirements.txt
