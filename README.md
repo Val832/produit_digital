@@ -1,61 +1,60 @@
-# Les bonnes pratiques de git
+# Projet d'évaluation du prix d'un bien immobilier dans Paris dans l'application Airbnb
 
-Création d'un environnement virtuel (/environement/venv), cela nous permettra à tous de travailler avec la même version de python.
-Création d'un fichier requirements.txt, cela nous permettra d'avoir les même versions de packages, on évitera les " ça marche sur mon ordi pourtant..."
+## Objectif
 
-En bref, l'utilisation de ces pratiques nous permettra une facilité de partage et de collaboration. Mais aussi d'opérer des changements uniquement dans l'environnement virtuel ce qui a pour avantage de ne créer aucun conflit avec d'autres projets en cours utilisant aussi python.
+Créer une application qui a pour but d'estimer le prix de votre bien immobilier situé à Paris sur l'application Airbnb.  Elle vous permettra de proposer votre logement au juste prix en fonction des caractéristiques et de la localité de votre bien.
 
+## Détails des dossiers et fichiers
 
+* VBA : Dossier contenant le fichier Excel FormulaireAIRBNB.xlsm
+* data : Dossier contenant des fichiers de nettoyage de la base de données
+* src : Dossier source. Il contient deux sous-dossiers :   
+        - data_science : Sous-dossier contenant les scripts pour réaliser le modèle.  
+        - df_manipulation : Sous-dossier contenant les scripts pour la transformation de la base.  
+* tests : Dossier contenant les tests unitaires.
+* utils : Dossier contenant un fichier txt donnant la liste des variables indicatrices créées dans la base de données.
+* venv : Dossier contenant l'environnement virtuel
+* README.txt : Fichier présentant l'organisation du projet et aidant à la manipulation des fichiers.
+* requirements.txt : Fichier listant les packages Python requis pour pouvoir utiliser l'application.  
 
-à chaque installation de package :
+De plus, un dictionnaire des variables de la base de données est disponible dans le wiki. 
 
-    quand j'installe un package :
-    pip install
+## Prise en main de l'application
 
-    cela me permet de le rendre dispo pour les autres développeurs :
-    pip freeze > requirements.txt
+* **Objectif** : Recueillir un certain nombre de caractéristiques sur votre logement pour pouvoir fournir celles-ci à l'algorithme de prédiction qui vous fournira ensuite une estimation de votre bien immobilier.
 
-    les autres développeurs se mettent à jour :
-    pip install -r requirements.txt
+* **Étapes** :   
+  i. Dans la feuille Dashboard du fichier Excel FormulaireAIRBNB.xlsm, cliquez sur le bouton « Estimer le prix d'une nuit dans mon bien à Paris, sur AirBNB ».  
+  ii. Renseignez les différentes informations demandées sur votre logement.  
+  iii. Cliquez sur Valider dans le formulaire pour voir apparaître le prix auquel vous pouvez louer votre bien pour une nuit.  
 
+## Détails des étapes de développement
 
-Une branche pour chacun d'entre nous a été créée
+### 1. Préparation de la base de données
 
-    Vous pouvez afficher toutes les branches dispo avec la commande :
-    git branch
+* **Objectif** : Disposer d'une base de données claire qui permet ensuite de choisir les variables explicatives à prendre.
 
-    Pour vous placer sur votre branche de dev :
+* **Étapes** :  
+  i. Sélectionner les variables choisies utiles à la prédiction du prix et standardiser le nom de ces variables.  
+  ii. Corriger les valeurs manquantes et les valeurs extrêmes.  
+  iii. Créer des nouvelles variables indicatrices qui affichent 1 si cette caractéristique est présente dans la description de ce bien ou 0 sinon.  
 
-    git checkout <branch_name>
+### 2. Réaliser l'algorithme de prédiction
 
+* **Objectif** : Prédire le prix d'un bien en fonction de plusieurs variables explicatives données par l'utilisateur dans le formulaire.
 
-Avant de bosser sur votre branche, récupérez les changements opérés sur le dépôt distant
+* **Étapes** :  
+  i. Réaliser plusieurs modèles de prédiction : régression linéaire, Ridge, LASSO et XGBOOST.  
+  ii. Comparer leurs performances pour déterminer lequel de ces modèles est le plus efficace.  
+  iii. Réaliser des tests unitaires pour valider la robustesse de l'algorithme choisi.  
 
-    git pull origin
+## Remarques importantes :
 
-    On active l'environnement virtuel nommé "venv" pour ce projet
+* Veillez à activer votre environnement virtuel si vous en avez un :  
+  - Sur Mac / Linux  
+  source venv/bin/activate  
+  - Sur Windows  
+  .\venv\Scripts\activate  
 
-    Windows : venv\Scripts\activate
-    Unix/MacOS : source venv/bin/activate
-
-
-Si un nouveau fichier est créé
-
-    git add file_name ou git add . permet d'ajouter tous les nouveaux fichiers crées
-
-    git commit -m "message"
-
-    Quand vous avez fini de bosser, envoyez les modifications vers le dépôt distant
-
-    git push origin
-
-
-Phase de test et demande de fusion
-
-    Avant de faire une demande de merge on s'assure que nos modifications n'ont pas entraîné de régressions par rapport aux tests.
-
-    Si tout est ok aller dans git lab :
-
-    Dans la barre latérale gauche onglet requêtes de fusion -> nouvelle requête de fusion
-    séléction de la branche source donc votre branche de dev -> comparer les branches et continuer
-
+* Assurez-vous que toutes les dépendances requises sont installées en utilisant  
+  pip install -r requirements.txt
