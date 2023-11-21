@@ -22,7 +22,7 @@ Additionally, a dictionary of database variables is available in the wiki.
 ## Execution of the project
 
 * To clone this repository  
-  `https://github.com/Val832/produit_digital.git`  
+  `git clone https://github.com/Val832/produit_digital.git`  
   `cd produit_digital`  
 
 * Be sure to activate your virtual environment if you have one  
