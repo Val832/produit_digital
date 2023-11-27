@@ -1,5 +1,6 @@
 # detect_columns permet de standariser les noms des variables (mininuscule et snake_case)
 # elle permet aussi de selection un ensemble de variable qui pourrait être intéressante pour notre analyse
+
 def detect_columns(data, select = True, nodollar = True):#add_var
     
     """

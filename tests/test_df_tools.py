@@ -1,5 +1,7 @@
 import pandas as pd 
 import unittest
+import os
+from unittest.mock import patch, MagicMock
 from src.df_manipulation.df_tools import *
 
 class TestCreateColumnFromMatch(unittest.TestCase):
@@ -69,7 +71,7 @@ class TestCreateColumnFromMatch(unittest.TestCase):
         result_df = create_column_from_match(self.df, 'text', words_dictionnary={})
         self.assertEqual(result_df.shape[1], self.df.shape[1])  # No new columns should be added
 
-class TestCountAmenities(unittest.TestCase):
+class TestCountAmenities_2023(unittest.TestCase):
     def setUp(self):
         # Set up sample data for testing
         self.example_amenities = [
@@ -82,23 +84,57 @@ class TestCountAmenities(unittest.TestCase):
 
     def test_basic_count(self):
         # Test if the function correctly counts the frequency of 'Wifi'
-        result = count_amenities(self.df_example)
+        result = count_amenities_2023(self.df_example)
         self.assertEqual(result.loc[result['Amenity'] == 'Wifi', 'Frequency'].values[0], 3)
 
     def test_data_cleaning(self):
         # Test if the function properly cleans the data (removes quotes)
-        result = count_amenities(self.df_example)
+        result = count_amenities_2023(self.df_example)
         self.assertNotIn('"', result['Amenity'].values)
 
     def test_sorting(self):
         # Test if the amenities are sorted correctly in descending order of frequency
-        result = count_amenities(self.df_example)
+        result = count_amenities_2023(self.df_example)
         self.assertTrue(result.iloc[0]['Frequency'] >= result.iloc[-1]['Frequency'])
 
     def test_output_format(self):
         # Test if the output DataFrame is formatted correctly (correct column names)
-        result = count_amenities(self.df_example)
+        result = count_amenities_2023(self.df_example)
         self.assertTrue(set(result.columns) == {'Amenity', 'Frequency'})
+
+class TestDownloadFile(unittest.TestCase):
+
+    @patch('requests.get')
+    @patch('requests.head')
+    def test_successful_download(self, mock_head, mock_get):
+        # Mock responses for HEAD and GET requests
+        mock_head.return_value.headers = {'content-length': '12345'}
+        mock_get.return_value.iter_content = MagicMock(return_value=[b'data']*10)
+        mock_get.return_value.__enter__ = MagicMock(return_value=mock_get.return_value)
+        
+        # Call the function
+        download_file('http://example.com/testfile.csv', 'testfile.csv')
+
+        # Check if the file was created
+        self.assertTrue(os.path.exists('testfile.csv'))
+        # Cleanup
+        os.remove('testfile.csv')
+
+    @patch('requests.get')
+    @patch('requests.head')
+    def test_gz_file_handling(self, mock_head, mock_get):
+        # Mock responses for HEAD and GET requests for a .gz file
+        mock_head.return_value.headers = {'content-length': '12345'}
+        mock_get.return_value.iter_content = MagicMock(return_value=[b'data']*10)
+        mock_get.return_value.__enter__ = MagicMock(return_value=mock_get.return_value)
+        
+        # Call the function for a .gz file
+        download_file('http://example.com/testfile.csv.gz', 'testfile.csv')
+
+        # Check if the .gz file was created and then removed after decompression
+        self.assertTrue(os.path.exists('testfile.csv'))
+        # Cleanup
+        os.remove('testfile.csv')
 
 if __name__ == '__main__':
     unittest.main()
