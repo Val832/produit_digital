@@ -123,7 +123,7 @@ print("Number of 'FAUX' elements:", result)
 file_path = 'data.csv'
 
 sheet_name = 'data'
-cell_reference = 'A3'
+cell_reference = 'A1'
 
 count = count_false_elements(read_csv(file_path))
 
