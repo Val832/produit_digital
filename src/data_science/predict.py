@@ -5,7 +5,7 @@ with open(model_pkl, 'rb') as file:
 
 dt = X_test_final.head(1)
 
-dt.insert(loc=0, column='const', value=1.0)
+#dt.insert(loc=0, column='const', value=1.0)
 
 srt_conf = loaded_model.get_prediction(dt).conf_int(alpha = .05 )
 srt_pre = loaded_model.predict(dt)
