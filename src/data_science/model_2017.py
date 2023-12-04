@@ -27,7 +27,7 @@ from mlxtend.feature_selection import SequentialFeatureSelector as SFS
 
 import pylab as pl
 
-dff = pd.read_csv('../data/airbnb2017/airbnb2017_dummies.csv', low_memory= False)
+dff = pd.read_csv('../../data/airbnb2017/airbnb2017_dummies.csv', low_memory= False)
 
 
 vars = ['neighbourhood_cleansed','room_type','accommodates','bedrooms','bathrooms','beds','bed_type','price']

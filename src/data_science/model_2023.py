@@ -30,7 +30,7 @@ import statsmodels.api as sm
 import pylab as pl
 
 
-d=pd.read_csv('../data/rbnb_with_dummies.csv',low_memory=False)
+d=pd.read_csv('../../data/rbnb_with_dummies.csv',low_memory=False)
 
 d['bathrooms'] = d['bathrooms_text'].str.extract(r'(\d+\.\d+|\d+)').astype(float)
 d['price'] = d.price.replace('[\$,]', '', regex=True).astype(float)
