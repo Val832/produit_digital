@@ -109,24 +109,13 @@ def count_false_elements(data_list):
     # Return the final count of "FAUX" occurrences
     return false_count
 
-# Example usage with your provided list
-data_list = ['3', '3ème', 'Auberge de jeunesse', 'Chambre privé', 'FAUX', 'VRAI', 'FAUX', '1', '2', 'Futon', 'FAUX', 'VRAI', 'FAUX', 'FAUX', 'FAUX', 'FAUX', 'FAUX', 'FAUX', 'FAUX', 'FAUX', 'FAUX', 'FAUX', 'FAUX', 'FAUX', 'FAUX']
-result = count_false_elements(data_list)
-
-# Print the result
-print("Number of 'FAUX' elements:", result)
-
-
-
-
 # Define file paths and constants
 file_path = 'data.csv'
 file_path_estimation = 'estimation.csv'
-sheet_name = 'data'
 cell_reference = 'A1'
-sheet_name1 = 'estimation'
+sheet_name = 'estimation'
 count = count_false_elements(read_csv(file_path))
 
 
 # Write mean value to Excel
-write_to_excel(file_path_estimation, count, cell_reference, sheet_name1)
+write_to_excel(file_path_estimation, count, cell_reference, sheet_name)
