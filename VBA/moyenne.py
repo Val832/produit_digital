@@ -86,25 +86,36 @@ def write_to_excel(path, value, cell, sheet_name):
     # Close the Excel workbook
     wb.close()
 
+def count_false_elements(data_list):
+    """
+    Count the number of occurrences of "FAUX" in a given list.
 
+    Parameters:
+    - data_list (list): The input list containing elements to be checked.
+
+    Returns:
+    - int: The count of occurrences of "FAUX" in the list.
+    """
+    # Initialize a counter variable to keep track of "FAUX" occurrences
+    false_count = 0
+
+    # Iterate through each element in the list
+    for element in data_list:
+        # Check if the current element is equal to "FAUX"
+        if element == "FAUX":
+            # Increment the counter if "FAUX" is found
+            false_count += 1
+
+    # Return the final count of "FAUX" occurrences
+    return false_count
 
 # Define file paths and constants
 file_path = 'data.csv'
+file_path_estimation = 'estimation.csv'
+cell_reference = 'A1'
+sheet_name = 'estimation'
+count = count_false_elements(read_csv(file_path))
 
-sheet_name = 'data'
-cell_reference = 'A3'
-
-# Read data from CSV
-data_from_csv = read_csv(file_path)
-print("Data from CSV:", data_from_csv)
-
-# Convert string data to float
-data_as_float = convert_str_to_float(data_from_csv)
-
-# Calculate mean and convert to string
-mean_value = calculate_mean(data_as_float)
-mean_as_str = str(mean_value)
-print("Mean:", mean_as_str)
 
 # Write mean value to Excel
-write_to_excel(file_path, mean_as_str, cell_reference, sheet_name)
+write_to_excel(file_path_estimation, count, cell_reference, sheet_name)
