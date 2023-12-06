@@ -20,28 +20,32 @@ def convert_str_to_float(list_data):
     return list_data_convert
 
 
-
-def read_csv(path):
+def read_csv_to_dataframe(path):
     """
-    Reads a CSV file and returns the last row as a list.
+    Reads the first two lines of a CSV file and returns them as a DataFrame.
 
     Parameters:
     - path (str): The path to the CSV file.
 
     Returns:
-    list: A list containing the data from the last row of the CSV file.
+    pandas.DataFrame: A DataFrame containing the data from the first two rows of the CSV file.
 
     Note:
     This function assumes that the CSV file uses ';' as the delimiter.
 
-    If the CSV file is empty, the function will return an empty list.
+    If the CSV file is empty or has only one row, the function will return a DataFrame with that row.
     """
     with open(path) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=';')
-        for row in csv_reader:
-            # Assuming the CSV file has multiple rows, 'last_row' will contain the last row
-            last_row = row
-    return last_row
+        # Read the first two rows
+        first_two_rows = [next(csv_reader) for _ in range(2)]
+
+    # Convert the list of lists to a DataFrame
+    df = pd.DataFrame(first_two_rows)
+
+    return df
+
+
 
 
 def write_to_excel(path, value, cell, sheet_name):
