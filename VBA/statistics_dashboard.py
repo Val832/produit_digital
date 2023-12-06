@@ -23,7 +23,7 @@ def calculate_average_price(data_path, neighbourhood_cleansed):
     return average_price
 
 # Example usage
-csv_path = r'C:\Users\garan\Desktop\produit_digital\data\airbnb2023\airbnb2023_clean.csv'
+csv_path = r'Desktop\produit_digital\data\airbnb2023\airbnb2023_clean.csv'
 neighbourhood_to_check = 'MÃ©nilmontant'  # Replace with the desired neighbourhood
 
 # Call the function to calculate the average price for the specified neighbourhood
