@@ -85,7 +85,12 @@ models = LassoCV(cv=20).fit(X_train_transformedls, y_train)
 cf = pd.Series(models.coef_, index=X.columns)
 select = list(cf[cf!=0].index)
 
-continuous_colsx = ['accommodates','bedrooms','bathrooms','beds']
+# List of continuous
+initial_list = ['accommodates', 'bedrooms', 'bathrooms', 'beds', 'accommodates_squared', 'bedrooms_squared', 'bathrooms_squared', 'beds_squared']
+
+# Check elements present in the first list and store them in a new list
+continuous_colsx = [elem for elem in initial_list if elem in select]
+
 delo2 = continuous_colsx
 other_colsx = list(df_model[select].drop(delo2, axis=1).columns)
 X_train_xgb = X_train[select]
@@ -136,9 +141,6 @@ sfs = sfs.fit(X_train_xgb_transformedls, y_train)
 final_select = list(X_train_xgb.iloc[:,list(sfs.k_feature_idx_)].columns)#.remove('translation missing: en.hosting_amenity_50')
 final_select.remove('translation missing: en.hosting_amenity_50')
 
-continuous_colsf = ['accommodates','bedrooms','bathrooms']
-delo2 = continuous_colsf
-other_colsf = list(df_model[final_select].drop(delo2, axis=1).columns)
 X_train_final = X_train[final_select]
 X_test_final = X_test[final_select]
 
