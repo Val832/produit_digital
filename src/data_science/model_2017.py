@@ -27,7 +27,17 @@ from mlxtend.feature_selection import SequentialFeatureSelector as SFS
 
 import pylab as pl
 
-dff = pd.read_csv('../../data/airbnb2017/airbnb2017_dummies.csv', low_memory= False).head(50)
+
+#Mutual information selection criteria
+mi =.02
+#Feature selection cross validation k-fold
+sfscv=10
+#Lasso cross validation k-fold
+lscv=20
+data_path = '../../data/airbnb2017/airbnb2017_dummies.csv'
+
+
+dff = pd.read_csv(data_path, low_memory= False).head(50)
 
 
 vars = ['neighbourhood_cleansed','room_type','accommodates','bedrooms','bathrooms','beds','bed_type','price']
@@ -79,7 +89,7 @@ X_train_transformedls = full_pipeline.transform(X_train)
 # Transform the testing data (if applicable)
 X_test_transformedls = full_pipeline.transform(X_test)
 
-models = LassoCV(cv=20).fit(X_train_transformedls, y_train)
+models = LassoCV(lscv=20).fit(X_train_transformedls, y_train)
 
 
 cf = pd.Series(models.coef_, index=X.columns)
@@ -98,7 +108,7 @@ sfs = SFS(lr,
           forward=True, 
           floating=False, 
           scoring='neg_mean_squared_error',
-          cv=10)
+          sfscv=10)
 
 sfs = sfs.fit(X_train_xgb, y_train)
 

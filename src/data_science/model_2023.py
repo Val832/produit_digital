@@ -26,8 +26,16 @@ from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_percenta
 import statsmodels.api as sm
 import pylab as pl
 
+#Mutual information selection criteria
+mi =.02
+#Feature selection cross validation k-fold
+sfscv=10
+#Lasso cross validation k-fold
+lscv=20
+data_path = '../../data/airbnb2023/airbnb2023_dummies.csv'
+
 # Read the dataset
-d = pd.read_csv('../../data/airbnb2023/airbnb2023_dummies.csv', low_memory=False)
+d = pd.read_csv(data_path, low_memory=False)
 
 # Extract numerical values from 'bathrooms_text' and 'price' columns
 d['bathrooms'] = d['bathrooms_text'].str.extract(r'(\d+\.\d+|\d+)').astype(float)
@@ -49,7 +57,8 @@ y = X.pop('price')
 
 # Compute mutual information scores
 mi_scores = detect_functionss.make_mi_scores(X, y)
-mi_select = mi_scores.loc[mi_scores > .02].index
+mi_select = mi_scores.loc[mi_scores > mi].index
+
 
 # Identify and delete columns with more than 300 missing values
 vars = list(d.iloc[:, :8].columns)
