@@ -27,7 +27,7 @@ from mlxtend.feature_selection import SequentialFeatureSelector as SFS
 
 import pylab as pl
 
-dff = pd.read_csv('../../data/airbnb2017/airbnb2017_dummies.csv', low_memory= False)
+dff = pd.read_csv('../../data/airbnb2017/airbnb2017_dummies.csv', low_memory= False).head(50)
 
 
 vars = ['neighbourhood_cleansed','room_type','accommodates','bedrooms','bathrooms','beds','bed_type','price']
@@ -85,46 +85,10 @@ models = LassoCV(cv=20).fit(X_train_transformedls, y_train)
 cf = pd.Series(models.coef_, index=X.columns)
 select = list(cf[cf!=0].index)
 
-# List of continuous
-initial_list = ['accommodates', 'bedrooms', 'bathrooms', 'beds', 'accommodates_squared', 'bedrooms_squared', 'bathrooms_squared', 'beds_squared']
 
-# Check elements present in the first list and store them in a new list
-continuous_colsx = [elem for elem in initial_list if elem in select]
-
-delo2 = continuous_colsx
-other_colsx = list(df_model[select].drop(delo2, axis=1).columns)
 X_train_xgb = X_train[select]
 X_test_xgb = X_test[select]
 
-
-continuous_transformer = Pipeline(steps=[
-    ('scaler', StandardScaler())
-])
-
-# Combine transformers using ColumnTransformer
-preprocessor = ColumnTransformer(
-    transformers=[
-        #('cat', categorical_transformer, categorical_cols),
-        ('cont', continuous_transformer, continuous_colsx),
-        ('other', 'passthrough', other_colsx)
-    ]
-)
-
-# Create a full pipeline including preprocessing and any model(s) you want to apply
-full_pipeline = Pipeline(steps=[('preprocessor', preprocessor),
-                                # Add additional steps for modeling if needed
-                                # ('lr', LinearRegression()())
-                               ])
-
-
-# Assuming 'X_train' is your training data
-full_pipeline.fit(X_train_xgb)
-
-# Transform the training data
-X_train_xgb_transformedls = full_pipeline.transform(X_train_xgb)
-
-# Transform the testing data (if applicable)
-X_test_xgb_transformedls = full_pipeline.transform(X_test_xgb)
 
 
 lr = LinearRegression()
@@ -136,10 +100,11 @@ sfs = SFS(lr,
           scoring='neg_mean_squared_error',
           cv=10)
 
-sfs = sfs.fit(X_train_xgb_transformedls, y_train)
+sfs = sfs.fit(X_train_xgb, y_train)
 
 final_select = list(X_train_xgb.iloc[:,list(sfs.k_feature_idx_)].columns)#.remove('translation missing: en.hosting_amenity_50')
-final_select.remove('translation missing: en.hosting_amenity_50')
+#final_select.remove('translation missing: en.hosting_amenity_50')
+
 
 X_train_final = X_train[final_select]
 X_test_final = X_test[final_select]
@@ -148,5 +113,3 @@ model = sm.OLS(y_train, sm.add_constant(X_train_final)).fit()
 
 #with open('best_model_2023.pkl', 'wb') as file:
  #   pickle.dump(model, file)
-
-

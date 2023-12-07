@@ -15,7 +15,7 @@ from sklearn.preprocessing import StandardScaler, MinMaxScaler, RobustScaler, On
 from sklearn.feature_selection import mutual_info_regression
 
 import pickle
-import detect_functions  # import detect_columns
+import detect_functionss  # import detect_columns
 import xgboost as xgb
 
 from mlxtend.feature_selection import SequentialFeatureSelector as SFS
@@ -35,10 +35,12 @@ d['price'] = d.price.replace('[\$,]', '', regex=True).astype(float)
 
 # Columns to drop
 drp = list(d.iloc[:, 0:10].columns)
-drp.extend(['neighbourhood_group_cleansed', 'amenities', 'bathrooms_text', 'availability_365', 'minimum_nights', 'latitude', 'longitude'])
+drp.extend(['neighbourhood_group_cleansed', 'amenities', 'bathrooms_text', 'latitude', 'longitude'])#, 'availability_365', 'minimum_nights'
 
 # Drop specified columns from the dataset
 d.drop(drp, axis=1, inplace=True)
+
+
 
 # Extract features and target variable 'price'
 pb = d.iloc[:, 7:]
@@ -46,12 +48,12 @@ X = pb.copy()
 y = X.pop('price')
 
 # Compute mutual information scores
-mi_scores = detect_functions.make_mi_scores(X, y)
+mi_scores = detect_functionss.make_mi_scores(X, y)
 mi_select = mi_scores.loc[mi_scores > .02].index
 
 # Identify and delete columns with more than 300 missing values
 vars = list(d.iloc[:, :8].columns)
-d = detect_functions.delete_na(d, vars, 300)
+d = detect_functionss.delete_na(d, vars, 300)
 vars.extend(list(mi_select))
 d = d[vars].copy()
 
@@ -68,8 +70,12 @@ y = X.pop('price')
 # Log transformation of target variable 'price'
 y = np.log(y)
 
+# Initial list
+initial_list = ['accommodates', 'bedrooms', 'bathrooms', 'beds', 'accommodates_squared', 'bedrooms_squared', 'bathrooms_squared', 'beds_squared']
+
+
 # Separate continuous and other columns
-continuous_cols = ['accommodates', 'bedrooms', 'beds', 'bathrooms', 'accommodates_squared', 'bedrooms_squared', 'bathrooms_squared', 'beds_squared']
+continuous_cols = [elem for elem in initial_list if elem in list(mi_select)]
 delo = continuous_cols + ['price']
 other_cols = list(df.drop(delo, axis=1).columns)
 
