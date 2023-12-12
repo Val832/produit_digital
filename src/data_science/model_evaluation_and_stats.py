@@ -1,7 +1,10 @@
 import csv_excel_operations as ceo
 import os 
 import statsmodels.api as sm
+import numpy as np
 import pickle
+
+print('Lancement du script Python')
 
 # keep the current path
 current_directory = os.getcwd()
@@ -18,23 +21,38 @@ sheet_name = 'Traitement'
 
 
 data = ceo.read_csv_to_dataframe(file_path_data)
+print('Les données sont bien lues.')
 
-#count = ceo.count_false_elements(data)
 
 
-# Write mean value to Excel
-#ceo.write_to_excel(file_path_estimation, count, cell_reference, sheet_name)
 
-model_pkl = 'best_model_2023.pkl'
 
-dt=data.head(1)
+#keep seconc line 
+dt = data.iloc[1:2, :].copy()
+# read line, which is a dataframe
+print(dt)
 
+# convert
+ceo.convert_df_to_float(dt)
+
+
+model_pkl = 'true_model_2023.pkl'
+
+#dt=data.head(2)
+print('On lance la prédiction.')
 # Charger le modèle à partir du fichier pickle
 with open(model_pkl, 'rb') as file:
     loaded_model = pickle.load(file)
 
-#srt_conf = loaded_model.get_prediction(dt).conf_int(alpha = .05 )
-#srt_pre = loaded_model.predict(dt)
-#srt = {'predict' : np.exp(srt_pre).iloc[0], 'born_inf' : np.exp(srt_conf)[0][0], 'born_sup' : np.exp(srt_conf)[0][1]}
+srt_conf = loaded_model.get_prediction(dt).conf_int(alpha = .05 )
+srt_pre = loaded_model.predict(dt)
+srt = {'predict' : np.exp(srt_pre).iloc[0], 'born_inf' : np.exp(srt_conf)[0][0], 'born_sup' : np.exp(srt_conf)[0][1]}
 
-#print(str)
+print(srt)
+
+
+print('Récupération de l estimation')
+
+ceo.write_to_excel(file_path_estimation,round(np.exp(srt_pre).iloc[0],2), 'A2', 'estimation')
+ceo.write_to_excel(file_path_estimation, round(np.exp(srt_conf)[0][0],2), 'B2', 'estimation')
+ceo.write_to_excel(file_path_estimation, round(np.exp(srt_conf)[0][1],2), 'C2', 'estimation')

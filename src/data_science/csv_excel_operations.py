@@ -3,21 +3,21 @@ import numpy as np
 import xlwings as xw
 import csv
 
-
-def convert_str_to_float(list_data):
+def convert_df_to_float(dataframe):
     """
-    Converts each string element in the input list to a floating-point number.
+    Converts all string columns in the input pandas DataFrame to floating-point numbers.
 
     Parameters:
-    - list_data (list): A list containing string representations of numbers.
+    - dataframe (pd.DataFrame): A pandas DataFrame containing string representations of numbers.
 
     Returns:
-    list: A new list where each element is converted to a float.
+    pd.DataFrame: A new DataFrame where each string column is converted to float.
     """
-    list_data_convert = []  # Crée une nouvelle liste pour stocker les résultats convertis
-    for i in range(len(list_data)):
-        list_data_convert.append(float(list_data[i]))
-    return list_data_convert
+    for column in dataframe.columns:
+        dataframe[column] = pd.to_numeric(dataframe[column], errors='coerce')
+
+    return dataframe
+
 
 
 def read_csv_to_dataframe(path):
