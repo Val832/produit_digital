@@ -77,25 +77,28 @@ def write_to_excel(path, value, cell, sheet_name):
     
     
     
-def count_false_elements(data_list):
+
+
+def count_true_elements(data_frame):
     """
-    Count the number of occurrences of "FAUX" in a given list.
+    Count the number of occurrences of "VRAI" in a given DataFrame, specifically in columns 3 to 41.
 
     Parameters:
-    - data_list (list): The input list containing elements to be checked.
+    - data_frame (pd.DataFrame): The input DataFrame containing elements to be checked.
 
     Returns:
-    - int: The count of occurrences of "FAUX" in the list.
+    - int: The count of occurrences of "VRAI" in columns 3 to 41 of the DataFrame.
     """
-    # Initialize a counter variable to keep track of "FAUX" occurrences
-    false_count = 0
+    # Initialize a counter variable to keep track of "VRAI" occurrences
+    true_count = 0
 
-    # Iterate through each element in the list
-    for element in data_list:
-        # Check if the current element is equal to "FAUX"
-        if element == "FAUX":
-            # Increment the counter if "FAUX" is found
-            false_count += 1
+    # Iterate through each row in the DataFrame
+    for index, row in data_frame.iterrows():
+        # Check if the elements in columns 3 to 41 are equal to "VRAI"
+        for column in range(2, 41):
+            if row.iloc[column] == 1:
+                # Increment the counter if "VRAI" is found
+                true_count += 1
 
-    # Return the final count of "FAUX" occurrences
-    return false_count
+    # Return the final count of "VRAI" occurrences
+    return true_count
