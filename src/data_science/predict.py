@@ -28,6 +28,9 @@ with open(model_pkl, 'rb') as file:
 # Ensure the correct path to the CSV file and encoding method are specified
 dt = pd.read_csv(file_path_data, sep=";", encoding='latin-1')
 
+    
+ceo.convert_df_to_float(dt)
+
 # Perform prediction and calculate confidence intervals
 srt_conf = loaded_model.get_prediction(dt).conf_int(alpha=0.05)
 srt_pre = loaded_model.predict(dt)
@@ -40,10 +43,8 @@ srt = {
     'born_sup': np.exp(srt_conf)[0][1]
 }
 
+print(srt)
 # Write results to the estimation.csv file
 ceo.write_to_excel(file_path_estimation, round(np.exp(srt_pre).iloc[0], 2), 'A2', 'estimation')
 ceo.write_to_excel(file_path_estimation, round(np.exp(srt_conf)[0][0], 2), 'B2', 'estimation')
 ceo.write_to_excel(file_path_estimation, round(np.exp(srt_conf)[0][1], 2), 'C2', 'estimation')
-
-# Add count of amenities
-ceo.write_to_excel(file_path_estimation, ceo.count_true_elements(dt), 'D2', 'estimation')

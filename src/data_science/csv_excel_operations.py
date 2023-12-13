@@ -5,16 +5,18 @@ import csv
 
 def convert_df_to_float(dataframe):
     """
-    Converts all string columns in the input pandas DataFrame to floating-point numbers.
+    Convertit les colonnes de type str en float en remplaçant les virgules par des points dans une DataFrame pandas.
 
     Parameters:
-    - dataframe (pd.DataFrame): A pandas DataFrame containing string representations of numbers.
+    - dataframe (pd.DataFrame): La DataFrame à convertir.
 
     Returns:
-    pd.DataFrame: A new DataFrame where each string column is converted to float.
+    - pd.DataFrame: La DataFrame convertie.
     """
+
     for column in dataframe.columns:
-        dataframe[column] = pd.to_numeric(dataframe[column], errors='coerce')
+        if dataframe[column].dtype == 'O':  # Vérifie le type de la colonne (Object/str)
+            dataframe[column] = dataframe[column].str.replace(',', '.', regex=False).astype(float)
 
     return dataframe
 
@@ -77,32 +79,6 @@ def write_to_excel(path, value, cell, sheet_name):
     
     
     
-
-
-def count_true_elements(data_frame):
-    """
-    Count the number of occurrences of "VRAI" in a given DataFrame, specifically in columns 3 to 41.
-
-    Parameters:
-    - data_frame (pd.DataFrame): The input DataFrame containing elements to be checked.
-
-    Returns:
-    - int: The count of occurrences of "VRAI" in columns 3 to 41 of the DataFrame.
-    """
-    # Initialize a counter variable to keep track of "VRAI" occurrences
-    true_count = 0
-
-    # Iterate through each row in the DataFrame
-    for index, row in data_frame.iterrows():
-        # Check if the elements in columns 3 to 41 are equal to "VRAI"
-        for column in range(2, 41):
-            if row.iloc[column] == 1:
-                # Increment the counter if "VRAI" is found
-                true_count += 1
-
-    # Return the final count of "VRAI" occurrences
-    return true_count
-
 
 def average_price_neighborhood(df, neighborhood):
     """
