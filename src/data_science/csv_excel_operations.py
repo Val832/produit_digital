@@ -102,3 +102,23 @@ def count_true_elements(data_frame):
 
     # Return the final count of "VRAI" occurrences
     return true_count
+
+
+def average_price_neighborhood(df, neighborhood):
+    """
+    Calculate the average price for a given neighborhood from a CSV file.
+
+    Parameters:
+    - df (dataset): 
+    - neighborhood (str): The neighborhood for which to calculate the average price.
+
+    Returns:
+    - float: The average price for the specified neighborhood.
+    """
+    # Filter the DataFrame based on the specified neighborhood
+    neighborhood_data = df[df['neighbourhood_cleansed'] == neighborhood]
+    
+    # Calculate the average price for the specified neighborhood
+    average_price = neighborhood_data['price'].mean()
+    
+    return average_price
