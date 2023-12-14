@@ -18,4 +18,7 @@ ME/
 ME/*.ipynb
 ME/*.csv
 .DS_STORE
-
+src/data_science/tst.ipynb
+src/data_science/model_simple_2023.pkl
+src/data_science/best_model_2023.pkl
+src/data_science/first_model.ipynb
