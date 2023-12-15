@@ -1,4 +1,3 @@
-#Chargement des packages et modules
 import numpy as np
 import pandas as pd
 
@@ -19,7 +18,7 @@ drp.extend(['neighbourhood_group_cleansed', 'amenities', 'bathrooms_text', 'avai
 
 d.drop(drp, axis=1, inplace=True)
 
-df = d.iloc[:,:8].copy()#.loc[:,lst].copy()
+df = d.iloc[:,:8].copy()
 con_cols = ['accommodates','bedrooms','bathrooms','beds']
 for i in con_cols:
     df[i + '_squared'] = d[i]**2
@@ -49,10 +48,6 @@ final_select = list(X_train.iloc[:,list(sfs.k_feature_idx_)].columns)
 X_train_final = X_train[final_select]
 X_test_final = X_test[final_select]
 
-# Supposons que vous ayez déjà vos données d'entraînement (X_train, y_train)
-# et vos données de test (X_test)
-
-# Entraîner votre modèle de régression linéaire sur les données d'entraînement
 model = sm.OLS(y_train, sm.add_constant(X_train_final)).fit()
 
 #with open('../src/data_science/model_simple_2023.pkl', 'wb') as file:
