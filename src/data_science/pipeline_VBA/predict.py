@@ -3,20 +3,26 @@ import pickle
 import pandas as pd
 import os 
 import numpy as np
-import src.data_science.pipeline_VBA.csv_excel_operations as ceo
-
-# Define the file paths for the model and the dataset
-model_pkl = 'data/models/true_model_2023.pkl'
+import csv_excel_operations as ceo
+print("calcul en cours ... Merci de patienter")
 
 # Keep the current path
 current_directory = os.getcwd()
 
 # Keep the beginning of the path
 parent_directory = os.path.dirname(os.path.dirname(current_directory))
+parent_directory_without_src = os.path.normpath(os.path.join(parent_directory, '..'))
+
 
 # Define file paths and constants
-file_path_data = os.path.join(parent_directory, 'VBA\data.csv')
-file_path_estimation = os.path.join(parent_directory, 'VBA\estimation.csv')
+file_path_data = os.path.join(parent_directory_without_src, 'VBA\data.csv')
+file_path_estimation = os.path.join(parent_directory_without_src, 'VBA\estimation.csv')
+
+
+# Define the file paths for the model and the dataset
+model_pkl = os.path.join(parent_directory_without_src,'data/models/true_model_2023.pkl')
+
+
 
 # Load the model from the pickle file
 with open(model_pkl, 'rb') as file:
