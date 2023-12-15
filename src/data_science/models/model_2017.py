@@ -9,7 +9,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
 
-import src.data_science.data_science_tools as data_science_tools
+import data_science_tools 
 import statsmodels.api as sm                          
 from mlxtend.feature_selection import SequentialFeatureSelector as SFS
 
