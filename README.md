@@ -1,39 +1,83 @@
-# Price Estimate of an Accommodation in Paris on Airbnb
+# 🏡 Projet de Prédiction des Prix de Location Airbnb à Paris
 
-## Project Goal
+## 🎯 Description du Projet
 
-Create an application which aims to estimate the price of your real estate located in Paris on the Airbnb application. It will allow you to offer your accommodation at the right price based on the characteristics and the location of your property.
+### Objectifs
+- Développer un outil 🛠️ avancé pour la prédiction des prix de location des logements Airbnb à Paris.
+- Fournir des estimations 💸 précises des prix à la nuitée, basées sur les caractéristiques détaillées de chaque logement.
+- Cible les chercheurs 🧑‍🔬, décideurs politiques 🏛️, journalistes 📰, analystes de marché 📈 et les particuliers souhaitant optimiser la valeur de leur bien à la location sur Airbnb.
 
-## Details of folders and files
+### Fonctionnalités et Méthodologie
+- **Estimations Personnalisées** 📋: Utilisation d'un formulaire pour permettre aux utilisateurs de recevoir des estimations basées sur des critères spécifiques.
+- **Interface Utilisateur en VBA** 🖥️: Création d'une interface conviviale pour la saisie des données et l'affichage des résultats.
+- **Traitement des Données en Excel** 📊: Analyse et traitement des données pour une approche robuste.
 
-* `VBA` : Folder which contains the Excel file FormulaireAIRBNB.xlsm.  
-* `config` : Folder which contains URL and paths to download databases.  
-* `src` : Source folder. It contains two subfolders:  
-        - `data_science` : Subfolder which contains the scripts to create the model.  
-        - `df_manipulation` : Subfolder which contains the scripts to download the database and create dummy variables. There are one Airbnb database dated back to 2017 and           another of 2023.  
-* `tests` : Folder which contains unit tests.
-* `venv` : Folder which contains the virtual environment.
-* `README.txt` : File which presents the organization of the project and helps for files manipulation.
-* `requirements.txt` : File which lists the Python packages required to use the application.  
+### Problématique
+- Comble la lacune de l'outil d'estimation de prix proposé par Airbnb, en offrant des prévisions plus précises et détaillées 🎯.
 
-Additionally, a dictionary of database variables is available in the wiki.
+## 📚 Utilisation et Sources des Données
 
-## Execution of the project
+### Source des Données : Inside Airbnb
+- **Provenance** 🌐: Les données proviennent d'Inside Airbnb, une initiative indépendante offrant des analyses détaillées des listings Airbnb.
+- **Contenu** 📄: Informations détaillées sur les listings parisiens, y compris emplacement, fréquence de location et revenus des hôtes.
+- **Fiabilité** ✔️: Données régulièrement mises à jour pour garantir leur exactitude et pertinence.
 
-* To clone this repository  
-  `git clone https://github.com/Val832/produit_digital.git`  
-  `cd produit_digital`  
+Pour accéder à la base de données, visitez [Inside Airbnb](http://insideairbnb.com/get-the-data.html).
 
-* Download the Airbnb 2017 database  
-  `python -m src.df_manipulation.2017.download_db2017`   
-* Create dummy variables from the Airbnb 2017 database  
-  `python -m src.df_manipulation.2017.create_dummies2017`  
-* Download the Airbnb 2023 database  
-  `python -m src.df_manipulation.2023.download_db2023`  
-* Create dummy variables from the Airbnb 2023 database  
-  `python -m src.df_manipulation.2023.create_dummies2023`  
+## 🛠️ Configuration et Utilisation
 
-* Make sure all required dependencies are installed  
-  `pip install -r requirements.txt`
+### Prérequis
+Il est recommandé d'utiliser un environnement virtuel Python 🐍 pour gérer les dépendances du projet. Suivez ces étapes pour le configurer :
 
-* Run the script of the model in the `src` folder.
+```bash
+# Installation du package virtualenv
+pip install virtualenv
+
+# Création et activation de l'environnement virtuel
+python3 -m venv env
+source env/bin/activate
+
+# Installation des dépendances
+pip install -r requirements.txt
+```
+
+## 📂 Structure du Projet
+
+- **VBA** 📁: Contient le fichier Excel `FormulaireAIRBNB.xlsm` pour l'interface utilisateur.
+- **config** 📁: Inclut les URL et les chemins pour le téléchargement des bases de données.
+- **src** 📁: Dossier source qui se divise en sous-dossiers pour la science des données (`data_science`) et la manipulation de données (`df_manipulation`).
+- **tests** 📁: Contient les tests unitaires qui assurent la fiabilité du code.
+- **venv** 📁: Dossier de l'environnement virtuel pour isoler les dépendances du projet.
+- **README.md** 📄:Document qui décrit l'organisation et l'utilisation du projet.
+- **requirements.txt** 📄:Recense les paquets Python nécessaires pour exécuter l'application.
+- **dictionnaire des données** 📚: Consultez le [wiki du projet](https://github.com/Val832/produit_digital/wiki/Dictionnaire-des-variables) pour un dictionnaire des variables de la base de données.
+- **Normes de code** 📚: Consultez le [wiki du projet](https://github.com/Val832/produit_digital/wiki/Dictionnaire-des-variables) pour consulter les normes de code de ce projet.
+
+## 🚀 Utilisation du Projet
+
+### ⏱️ Pour une Estimation Rapide
+
+1. Ouvrez le fichier `FormulaireAIRBNB.xlsm` situé dans le dossier `VBA`.
+2. Remplissez vos informations dans le formulaire VBA pour recevoir une estimation de prix.
+
+### 🧐 Pour les plus Curieux 
+
+#### Téléchargement et Préparation des Données
+
+À partir de la racine du projet, lancez ces commandes pour préparer les données :
+
+```bash
+# Télécharger la base de données Airbnb de 2017
+python -m src.df_manipulation.2017.download_db2017
+
+# Créer les variables fictives pour la base de données de 2017
+python -m src.df_manipulation.2017.create_dummies2017
+
+# Télécharger la base de données Airbnb de 2023
+python -m src.df_manipulation.2023.download_db2023
+
+# Créer les variables fictives pour la base de données de 2023
+python -m src.df_manipulation.2023.create_dummies2023
+```
+
+Après la préparation des données, dirigez-vous vers le dossier `src/data_science/models` pour explorer la construction des modèles prédictifs.
