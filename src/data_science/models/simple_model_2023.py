@@ -4,7 +4,7 @@ import pandas as pd
 
 from sklearn.linear_model import  LinearRegression
 from sklearn.model_selection import train_test_split
-import src.data_science.data_science_tools as data_science_tools #import detect_columns
+import data_science_tools 
 from mlxtend.feature_selection import SequentialFeatureSelector as SFS
 
 import statsmodels.api as sm

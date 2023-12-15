@@ -9,7 +9,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
-import src.data_science.data_science_tools as data_science_tools #import detect_columns
+import data_science_tools 
 from mlxtend.feature_selection import SequentialFeatureSelector as SFS
 import statsmodels.api as sm
 

@@ -2,7 +2,7 @@ import pandas as pd
 
 from src.df_manipulation.df_tools import download_file
 from config.constants import URL_AIRBNB_2017, PATH_DB_2017, PATH_CLEAN_DB_2017
-from src.data_science.data_science_tools import detect_columns
+from src.data_science.models.data_science_tools import detect_columns
 
 # Download the database and export it to the data folder.
 download_file(URL_AIRBNB_2017, PATH_DB_2017)
